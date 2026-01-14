@@ -1,4 +1,4 @@
 # Beavgredients
 
 Team:
-Alexander Sahlstrom
+Alexander Sahlstrom, Levi Cook, Nico Sarmiento, Kenneth Robertson
