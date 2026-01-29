@@ -30,4 +30,4 @@
 - Alex: Working on coding guidline for milestone 3 and weekly report 4.
 - Levi:***TODO***
 - Nico:***TODO***
-- Kenneth:***TODO***
+- Kenneth:Working on Process description for milestone 3, prepare info for Deliverable 2, Research into Github pages.
