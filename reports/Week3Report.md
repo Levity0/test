@@ -17,6 +17,7 @@
     - Test Plan & Bugs
     - Documentation Plan
   - Finish Figma (3 days)
+  - Complete Week 4 Report (1 day)
 
 **2. Contributions of Individual Team Members**
 - Alex: Worked on the Novelty, Major Functions, Use Case 2, Risks, and Team Process Description subsections within the living document to meet milestone 2.
