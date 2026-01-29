@@ -1,11 +1,33 @@
-**Report Week 4**
+**Report Week 3**
 
 **1. Team Report**
-- The first subsection is easy. It should be an exact copy of the third section from last week (i.e., goals from a week ago). It is empty for the first week.
-- The second subsection reports on progress and issues: what you did, what worked, what you learned, where you had trouble, and where you are stuck.
-- The third subsection should outline your plans and goals for the following week. Each bullet point should include a measurable task and a time estimate. You may use nested bullet points for parts of a larger task. No bottom-level time estimate should be greater than 3 days. If a task would be larger, think about a logical way to break it down and to have insight into progress. If tasks from one week aren’t yet complete, they should roll over into tasks for the next week, with an updated estimate for time to completion.
+- Week 3 Goals:
+  - Add the following subsections to the living document for Milestone 3 (3 days each):
+    - Software Architecture
+    - Software Design
+    - Coding Guideline
+    - Project Schedule
+    - Test Plan & Bugs
+    - Documentation Plan
+  - Finish Figma (3 days)
+  - Complete Week 4 Report (1 day)
+- Process and Issues:
+  - Milestone 3 sections: In progress ***UPDATE ME***
+  - Basic design for figma is complete but needs refining, delay due to learning figma tools ***UPDATE ME***
+  - Week 4 Report: In Progress ***UPDATE ME***
+- Goals for Week 5:
+  - Begin development of frontend:
+    - Recreate figma design using react.js and next.js 
+  - Begin development of backend features:
+    - Retrieve meal data from TheMealDB (3 days)
+    - Display meal catalogue (3 days)
+    - Store and retrieve user's name and password (3 days)
+    - Search functionality (3 days)
+    - Filter functionality (3 days)
+  - Research potential site hosting (1 day)
 
 **2. Contributions of Individual Team Members**
-- The first subsection is easy. It should be an exact copy of the third section from last week (i.e., goals from a week ago). It is empty for the first week.
-- The second subsection reports on progress and issues: what you did, what worked, what you learned, where you had trouble, and where you are stuck.
-- The third subsection should outline your plans and goals for the following week. Each bullet point should include a measurable task and a time estimate. You may use nested bullet points for parts of a larger task. No bottom-level time estimate should be greater than 3 days. If a task would be larger, think about a logical way to break it down and to have insight into progress. If tasks from one week aren’t yet complete, they should roll over into tasks for the next week, with an updated estimate for time to completion.
+- Alex: Working on coding guidline for milestone 3 and weekly report 4.
+- Levi:
+- Nico:
+- Kenneth:
