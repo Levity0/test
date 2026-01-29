@@ -28,6 +28,6 @@
 
 **2. Contributions of Individual Team Members**
 - Alex: Working on coding guidline for milestone 3 and weekly report 4.
-- Levi:
-- Nico:
-- Kenneth:
+- Levi:***TODO***
+- Nico:***TODO***
+- Kenneth:***TODO***
