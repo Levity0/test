@@ -26,4 +26,4 @@
 - Alex: Worked on the Novelty, Major Functions, Use Case 2, Risks, and Team Process Description subsections within the living document to meet milestone 2.
 - Levi: ***TODO***
 - Nico: ***TODO***
-- Kenneth: ***TODO***
+- Kenneth: Put together Todo list for group (for Milestone 1,2 & 3), Revised Living doc for Deliverable 1, Formed slides for Deliverable 1
