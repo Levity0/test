@@ -12,9 +12,9 @@
   - Finish Figma (3 days)
   - Complete Week 4 Report (1 day)
 - Process and Issues:
-  - Milestone 3 sections: In progress ***UPDATE ME***
-  - Basic design for figma is complete but needs refining, delay due to learning figma tools ***UPDATE ME***
-  - Week 4 Report: In Progress ***UPDATE ME***
+  - Milestone 3 sections (In progress)
+  - Basic design for figma is complete but needs refining, delay due to learning figma tools (in progress)
+  - Week 4 Report: In Progress (in progress)
 - Goals for Week 5:
   - Begin development of frontend:
     - Recreate figma design using react.js and next.js 
