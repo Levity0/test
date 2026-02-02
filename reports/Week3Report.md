@@ -26,5 +26,5 @@
 - Alex: Worked on the Novelty, Major Functions, Use Case 2, Risks, and Team Process Description subsections within the living document to meet milestone 2.
 - Levi: Worked on the Abstract, Goal, Effects, briefly the technical approach, Use Case 1, Non-functional reqs, and a tentative timeline for the project. Additionally I helped put together the "Problem" slide for
         Deliverable 1.
-- Nico: ***TODO***
+- Nico: Started Figma for main page & worked on Use Case 4, Risks & Abstract
 - Kenneth: Put together Todo list for group (for Milestone 1,2 & 3), Revised Living doc for Deliverable 1, Formed slides for Deliverable 1
