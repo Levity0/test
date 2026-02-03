@@ -18,8 +18,8 @@
 
 
 **2. Contributions of Individual Team Members**
-- Alex: Working on coding guidline for milestone 3 and weekly report 4.
-- Levi: Working on the Software and Archeticture Design for our living document/project milestone 3. I want to have it very set in stone what/how we will code our web app
-- Nico: Finishing Figma for front page, starting recreating figma with react.js and next.js
-- Kenneth:Working on Process description for milestone 3, prepare info for Deliverable 2, Research into Github pages.
+- Alex:
+- Levi: 
+- Nico:
+- Kenneth:
 
