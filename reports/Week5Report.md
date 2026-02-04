@@ -11,10 +11,15 @@
     - Search functionality (3 days)
     - Filter functionality (3 days)
   - Research potential site hosting (1 day)
+  - Midterm Presentation (2 days)
 - Process and Issues:
-  - 
+  - Midterm Presentation - 
+  - Development - 
+  - Hosting Research -
 - Goals for Week 5:
-  - 
+  - Give midterm presentation
+  - Develop Backend
+  - Develop Frontend
 
 
 **2. Contributions of Individual Team Members**
