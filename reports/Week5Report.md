@@ -27,7 +27,11 @@ Goals Planned for week 6:
 *Contributions of Team*
 
 Team Member: Kenneth
-Goals planned for this week:  Midterm Slides, Emailer, Organize what needs to be done.
+Goals planned for this week:
+- Midterm Slides
+- Emailer
+- Organize what needs to be done.
+
 Team progress and issues:
 - Kenneth worked on the Midterm slides, started work on the Emailer, and organized all the work for the next 4 weeks.
 - Kenneth found that having everything organized well made the team work in a more fluid motion, He also found that the Emailer is going to take a bit more work than he thought, and the Deliverable shouldn’t be too bad.
@@ -41,6 +45,7 @@ Goals planned for next week:
 
 Team Member: Levi
 Goals planned for this week:
+
 Team progress and issues:
 - what team member did
 - what worked
@@ -53,6 +58,7 @@ Goals planned for next week:
 
 Team Member: Alex
 Goals planned for this week:
+
 Team progress and issues:
 - what team member did
 - what worked
@@ -65,6 +71,7 @@ Goals planned for next week:
 
 Team Member: Nico
 Goals planned for this week:
+
 Team progress and issues:
 - what team member did
 - what worked
