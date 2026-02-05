@@ -44,17 +44,15 @@ Goals planned for next week:
 
 
 Team Member: Levi
-Goals planned for this week:
+Goals planned for this week: Work on the development of the recipe display and search. Create slides centered around testing out product and why our solution will work.
 
 Team progress and issues:
-- what team member did
-- what worked
-- what team member learned
-- where team member had trouble and where team member is stuck
+- what team member did: Wrote the software architecture and design portions of our Living Doc, research tools to use for our development.
+- what worked: After doing research I found a working and free tool stack for us to use for development of our web app.
+- what team member learned: I learned that there are a lot of different tools we could use for web development that I had never heard of before. Ultimately I thought it would be best however, to choose a framework we all have some experience in.
+- where team member had trouble and where team member is stuck: I am feeling slightly confused/overwhelmed about starting development. I don't exactly know how best to begin implementing this project and how our src repo should be structured.
 
-Goals planned for next week:
-- measurable task 1 and a time estimate in days.
-- measurable task 2 and a time estimate in days.
+Goals planned for next week: Finish my portion of our presentation (By 2/8), Develop Recipe display (By end of week 6), Develop Recipe search (By end of week 6, start of week 7)
 
 Team Member: Alex
 Goals planned for this week:
