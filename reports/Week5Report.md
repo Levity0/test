@@ -13,18 +13,18 @@
   - Research potential site hosting (1 day)
   - Midterm Presentation (2 days)
 - Process and Issues:
-  - Midterm Presentation - 
-  - Development - 
-  - Hosting Research -
+  - Midterm Presentation - (In Progress)
+  - Development - (In Progress)
+  - Hosting Research - Done
 - Goals for Week 5:
-  - Give midterm presentation
-  - Develop Backend
-  - Develop Frontend
+  - Make midterm presentation
+  - Develop Backend: Search Recipes, Emailer, Display Recipes.
+  - Develop Frontend: Home Page
 
 
 **2. Contributions of Individual Team Members**
 - Alex:
 - Levi: 
 - Nico:
-- Kenneth:
+- Kenneth: Work on development of Emailer, Researched more on the hosting, Got information and deligating done for each part of the project.
 
