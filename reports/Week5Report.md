@@ -24,7 +24,7 @@
 
 **2. Contributions of Individual Team Members**
 - Alex:
-- Levi: 
+- Levi: Work on the development of the recipe display and search. Wrote the software architecture and design portions of our Living Doc. Will create slide centered around testing our product/why our solution works. Did research on tools to be used in development.
 - Nico:
 - Kenneth: Work on development of Emailer, Researched more on the hosting, Got information and deligating done for each part of the project.
 
