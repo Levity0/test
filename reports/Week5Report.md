@@ -54,18 +54,19 @@ Team progress and issues:
 
 Goals planned for next week: Finish my portion of our presentation (By 2/8), Develop Recipe display (By end of week 6), Develop Recipe search (By end of week 6, start of week 7)
 
-Team Member: Alex
+*Team Member: Alex*
 Goals planned for this week:
+- Begin development of 
 
 Team progress and issues:
-- what team member did
-- what worked
-- what team member learned
-- where team member had trouble and where team member is stuck
+- what team member did: Wrote the Coding Guidlines section and revised the Risk Assessement, Project Schedule, and Test Plan & Bugs sections for the living document.
+- what worked: Dividing tasks amongst members of the team was very effective for team productivity.
+- what team member learned: Alex learned that coding guidelines are very important to ensure that the quality of the teams code is professional, clear, and easy to debug.
+- where team member had trouble and where team member is stuck: Alex is having the most trouble finding the time to work on developmeent due to workload from other courses.
   
 Goals planned for next week:
-- measurable task 1 and a time estimate in days.
-- measurable task 2 and a time estimate in days.
+- Finish my section of the presentation in time for Tuesday (1 days) 
+- Develope recipe generation feature (3 days)
 
 Team Member: Nico
 Goals planned for this week:
