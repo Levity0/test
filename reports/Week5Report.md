@@ -69,13 +69,14 @@ Goals planned for next week:
 
 Team Member: Nico
 Goals planned for this week:
+- Start Front End Code
 
 Team progress and issues:
-- what team member did
-- what worked
-- what team member learned
+- what team member did : finished designing front end, started coding it
+- what worked : having other people to help code the front end to work is a godsend
+- what team member learned : Already had some experiencing designing and coding front end
 - where team member had trouble and where team member is stuck
 
 Goals planned for next week:
-- measurable task 1 and a time estimate in days.
-- measurable task 2 and a time estimate in days.
+- Finish Front End (how it looks) ~2/10
+- Start Developing the pantry function (By end of week 6, start of week 7)
