@@ -23,7 +23,7 @@
 
 
 **2. Contributions of Individual Team Members**
-- Alex:
+- Alex: Wrote the coding guidelines and revised risk assessement, project schedule, and test plan & bugs. Began work on midterm slideshow presentation.
 - Levi: Work on the development of the recipe display and search. Wrote the software architecture and design portions of our Living Doc. Will create slide centered around testing our product/why our solution works. Did research on tools to be used in development.
 - Nico:
 - Kenneth: Work on development of Emailer, Researched more on the hosting, Got information and deligating done for each part of the project.
