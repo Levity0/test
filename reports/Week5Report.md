@@ -1,4 +1,5 @@
 *Team Report Week 5*
+
 Goals for This week
  - Begin development of frontend:
  - Recreate figma design using react.js and next.js
@@ -22,6 +23,7 @@ Goals Planned for week 6:
 - Front end (Main Menu) (7 days)
 
 *Contributions of Team*
+
 Team Member: Kenneth
 Goals planned for this week:  Midterm Slides, Emailer, Organize what needs to be done.
 Team progress and issues:
