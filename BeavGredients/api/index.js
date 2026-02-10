@@ -1,21 +1,16 @@
 const express = require("express");
 const app = express();
 
-// IMPORTANT: parse JSON bodies
 app.use(express.json());
 
-// Example routes
+// ✅ Example API routes
 app.get("/api/health", (req, res) => {
   res.json({ ok: true, message: "Express API working on Vercel" });
-});
-
-app.get("/api/hello", (req, res) => {
-  res.json({ message: "Hello from Express!" });
 });
 
 app.post("/api/echo", (req, res) => {
   res.json({ youSent: req.body });
 });
 
-// Export the app for Vercel
+// Export the app for Vercel Serverless Functions
 module.exports = app;
