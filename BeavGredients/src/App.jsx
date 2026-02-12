@@ -1,35 +1,46 @@
 import { useEffect, useState } from "react";
 
 export default function App() {
-  const [health, setHealth] = useState(null);
-  const [echoResp, setEchoResp] = useState(null);
+  const [now, setNow] = useState(new Date().toLocaleString());
+  const hello = import.meta.env.VITE_HELLO ?? "(missing VITE_HELLO)";
 
   useEffect(() => {
-    fetch("/api/health")
-      .then((r) => r.json())
-      .then(setHealth)
-      .catch((e) => setHealth({ ok: false, error: String(e) }));
+    const id = setInterval(() => setNow(new Date().toLocaleString()), 1000);
+    return () => clearInterval(id);
   }, []);
 
-  async function sendEcho() {
-    const res = await fetch("/api/echo", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: "Hello backend!", time: Date.now() })
-    });
-    setEchoResp(await res.json());
-  }
-
   return (
-    <div style={{ padding: 24, fontFamily: "system-ui" }}>
-      <h1>React + Express (Vercel)</h1>
+    <div style={{ fontFamily: "system-ui", padding: 24, lineHeight: 1.5 }}>
+      <header>
+        <h1>✅ React is running</h1>
+        <p>This is a simple HTML-rendered smoke test page.</p>
+      </header>
 
-      <h2>GET /api/health</h2>
-      <pre>{health ? JSON.stringify(health, null, 2) : "Loading..."}</pre>
+      <main>
+        <section>
+          <h2>Status</h2>
+          <ul>
+            <li>
+              <strong>Current time:</strong> <time>{now}</time>
+            </li>
+            <li>
+              <strong>Build ID:</strong> <code>{__BUILD_ID__}</code>
+            </li>
+          </ul>
+        </section>
 
-      <h2>POST /api/echo</h2>
-      <button onClick={sendEcho}>Send Echo</button>
-      <pre>{echoResp ? JSON.stringify(echoResp, null, 2) : "Click the button"}</pre>
+        <section>
+          <h2>Environment variable test</h2>
+          <p>
+            <code>VITE_HELLO</code>: <strong>{hello}</strong>
+          </p>
+          <p>If that shows a real value, Vercel env vars are working.</p>
+        </section>
+      </main>
+
+      <footer>
+        <small>Vercel + React smoke test</small>
+      </footer>
     </div>
   );
 }
