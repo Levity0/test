@@ -1,46 +1,52 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function App() {
-  const [now, setNow] = useState(new Date().toLocaleString());
-  const hello = import.meta.env.VITE_HELLO ?? "(missing VITE_HELLO)";
+  const [to, setTo] = useState("");
+  const [subject, setSubject] = useState("Test email");
+  const [message, setMessage] = useState("Hello from Vercel!");
+  const [status, setStatus] = useState(null);
 
-  useEffect(() => {
-    const id = setInterval(() => setNow(new Date().toLocaleString()), 1000);
-    return () => clearInterval(id);
-  }, []);
+  async function sendEmail(e) {
+    e.preventDefault();
+    setStatus("Sending...");
+
+    const r = await fetch("/api/send-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ to, subject, message }),
+    });
+
+    const data = await r.json();
+    setStatus(data.ok ? "✅ Sent!" : `❌ ${data.error || "Failed"}`);
+  }
 
   return (
-    <div style={{ fontFamily: "system-ui", padding: 24, lineHeight: 1.5 }}>
-      <header>
-        <h1>✅ React is running</h1>
-        <p>This is a simple HTML-rendered smoke test page.</p>
-      </header>
+    <main style={{ fontFamily: "system-ui", padding: 24 }}>
+      <h1>Email Test</h1>
 
-      <main>
-        <section>
-          <h2>Status</h2>
-          <ul>
-            <li>
-              <strong>Current time:</strong> <time>{now}</time>
-            </li>
-            <li>
-              <strong>Build ID:</strong> <code>{__BUILD_ID__}</code>
-            </li>
-          </ul>
-        </section>
+      <form onSubmit={sendEmail}>
+        <label>
+          To
+          <input value={to} onChange={(e) => setTo(e.target.value)} type="email" required />
+        </label>
+        <br /><br />
 
-        <section>
-          <h2>Environment variable test</h2>
-          <p>
-            <code>VITE_HELLO</code>: <strong>{hello}</strong>
-          </p>
-          <p>If that shows a real value, Vercel env vars are working.</p>
-        </section>
-      </main>
+        <label>
+          Subject
+          <input value={subject} onChange={(e) => setSubject(e.target.value)} required />
+        </label>
+        <br /><br />
 
-      <footer>
-        <small>Vercel + React smoke test</small>
-      </footer>
-    </div>
+        <label>
+          Message
+          <textarea value={message} onChange={(e) => setMessage(e.target.value)} rows={5} required />
+        </label>
+        <br /><br />
+
+        <button type="submit">Send Email</button>
+      </form>
+
+      {status && <p>{status}</p>}
+    </main>
   );
 }
