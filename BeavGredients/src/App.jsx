@@ -1,53 +1,45 @@
 import { useState } from "react";
 
-export default function App() {
-  
+function EmailForm() {
   const [to, setTo] = useState("");
-  const [subject, setSubject] = useState("Test email");
+  const [subject, setSubject] = useState("Test Email");
   const [message, setMessage] = useState("Hello from Vercel!");
-  const [status, setStatus] = useState(null);
+  const [status, setStatus] = useState("");
 
   async function sendEmail(e) {
     e.preventDefault();
     setStatus("Sending...");
 
-    const r = await fetch("/api/send-email", {
+    const res = await fetch("/api/send-email", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ to, subject, message }),
     });
 
-    const data = await r.json();
-    setStatus(data.ok ? "✅ Sent!" : `❌ ${data.error || "Failed"}`);
+    const data = await res.json();
+    setStatus(data.ok ? "✅ Email sent!" : "❌ " + data.error);
   }
 
   return (
-    <main style={{ fontFamily: "system-ui", padding: 24 }}>
-      <h1>Email Test</h1>
+    <form onSubmit={sendEmail}>
+      <h2>Send Email</h2>
 
-      <form onSubmit={sendEmail}>
-        <label>
-          To
-          <input value={to} onChange={(e) => setTo(e.target.value)} type="email" required />
-        </label>
-        <br /><br />
+      <label>Email To:</label><br />
+      <input value={to} onChange={(e) => setTo(e.target.value)} required /><br /><br />
 
-        <label>
-          Subject
-          <input value={subject} onChange={(e) => setSubject(e.target.value)} required />
-        </label>
-        <br /><br />
+      <label>Subject:</label><br />
+      <input value={subject} onChange={(e) => setSubject(e.target.value)} required /><br /><br />
 
-        <label>
-          Message
-          <textarea value={message} onChange={(e) => setMessage(e.target.value)} rows={5} required />
-        </label>
-        <br /><br />
+      <label>Message:</label><br />
+      <textarea value={message} onChange={(e) => setMessage(e.target.value)} /><br /><br />
 
-        <button type="submit">Send Email</button>
-      </form>
+      <button type="submit">Send Email</button>
 
-      {status && <p>{status}</p>}
-    </main>
+      <p>{status}</p>
+    </form>
   );
 }
+
+export default EmailForm;
