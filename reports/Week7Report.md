@@ -59,8 +59,8 @@ Goals planned for next week: Finish my portion of our presentation (By 2/8), Dev
 - **Where team member had trouble and where team member is stuck:** Alex found that starting development felt daunting before this week but after the team discussed it where to begin beginning development became much easier.
   
 Goals planned for next week:
-- Finish my section of the presentation in time for Tuesday (1 days) 
-- Develope recipe generation feature (3 days)
+- Finish meal display feature (3 days) 
+- Begin development of meal search feature (3 days)
 
 Team Member: Nico
 Goals planned for this week:
