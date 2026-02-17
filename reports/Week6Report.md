@@ -15,7 +15,10 @@ Team Progress and Issues
 - The team is finding it hard to find the appropriate time to finish their assigned tasks, but we aren't worried on that front.
 
 Goals Planned for week 6:
-- 
+- Documentation Documents(2 Days)
+- Search (4 days)
+- Display recipes (4 days)
+- Front end (Main Menu) (7 days)
 
 *Contributions of Team*
 
@@ -31,7 +34,8 @@ Team progress and issues:
 - There isn’t much that Kenneth has been stuck on, the hardest part is just getting the work done.
 
 Goals planned for next week:
-- 
+- Documentation Documents
+- Emailer
 
 
 Team Member: Levi
