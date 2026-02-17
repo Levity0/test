@@ -47,16 +47,16 @@ Team progress and issues:
 
 Goals planned for next week: Finish my portion of our presentation (By 2/8), Develop Recipe display (By end of week 6), Develop Recipe search (By end of week 6, start of week 7)
 
-*Team Member: Alex*
-Goals planned for this week:
-- Finish my section of the presentation (1 days)
-- Begin development of reciper generator (3 days)
+**Team Member: Alex**
+**Goals planned for this week:**
+- Finish development of general meal display (3 days)
+- Start development of meal search feature (3 days)
 
-Team progress and issues:
-- what team member did: Wrote the Coding Guidlines section and revised the Risk Assessement, Project Schedule, and Test Plan & Bugs sections for the living document.
-- what worked: Dividing tasks amongst members of the team was very effective for team productivity.
-- what team member learned: Alex learned that coding guidelines are very important to ensure that the quality of the teams code is professional, clear, and easy to debug.
-- where team member had trouble and where team member is stuck: Alex is having the most trouble finding the time to work on developmeent due to workload from other courses.
+**Team progress and issues:**
+- **what team member did:** Finished my sections of the presentation, did research of our development tech stack, and began development of the general meal display feature for the backend. Now when running the server on local host using node meal information is displayed to the user.
+- **what worked:** Dividing up sections of the presentation made work much more efficient. We also held a meeting to research how to begin development using our chosen tech stack and we ended up refactoring our repository to be more organized.
+- **what team member learned:** Alex learned that it can be difficult to know where to start with web development due to the complexity of each component but that the node environment makes development much easier.
+- **Where team member had trouble and where team member is stuck:** Alex found that starting development felt daunting before this week but after the team discussed it where to begin beginning development became much easier.
   
 Goals planned for next week:
 - Finish my section of the presentation in time for Tuesday (1 days) 
