@@ -52,7 +52,7 @@ Goals planned for next week: Finish my portion of our presentation (By 2/8), Dev
 *Team Member: Alex*
 Goals planned for this week:
 - Finish my section of the presentation (1 days)
-- Begin development of reciper generator (3 days)
+- Begin development of meal display feature (3 days)
 
 Team progress and issues:
 - what team member did: Wrote the Coding Guidlines section and revised the Risk Assessement, Project Schedule, and Test Plan & Bugs sections for the living document.
