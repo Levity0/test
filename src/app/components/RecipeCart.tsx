@@ -1,0 +1,87 @@
+import { X } from "lucide-react";
+import { Button } from "./ui/button";
+import { ScrollArea } from "./ui/scroll-area";
+
+interface SelectedRecipe {
+  id: number;
+  name: string;
+}
+
+export function RecipeCart({ isOpen }: { isOpen: boolean }) {
+  const selectedRecipes: SelectedRecipe[] = [
+    { id: 1, name: "Lola Mi's Halo Halo" },
+    { id: 2, name: "Lola Mi's Halo Halo" },
+  ];
+
+  const missingIngredients = ["Milk", "Mango", "Cereal", "Marshmallows"];
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="w-80 border-l bg-white h-screen flex flex-col">
+      {/* Header */}
+      <div className="p-6 border-b">
+        <h2 className="text-xl font-semibold">Recipe Kart</h2>
+      </div>
+
+      {/* Selected Recipes */}
+      <div className="p-6 border-b">
+        <h3 className="font-medium mb-4">Selected Recipes</h3>
+        <div className="space-y-2">
+          {selectedRecipes.map((recipe) => (
+            <div
+              key={recipe.id}
+              className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+            >
+              <span className="text-sm">{recipe.name}</span>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-6 w-6 bg-red-500 hover:bg-red-600 rounded-full"
+              >
+                <X className="h-4 w-4 text-white" />
+              </Button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Summary */}
+      <div className="p-6 border-b">
+        <h3 className="font-medium mb-4">Summary</h3>
+        <div className="space-y-2">
+          <div className="flex justify-between text-sm">
+            <span className="text-gray-600">Total Recipes:</span>
+            <span className="font-medium">2</span>
+          </div>
+          <div className="flex justify-between text-sm">
+            <span className="text-gray-600">Missing Ingredients:</span>
+            <span className="font-medium">4</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Missing Ingredients */}
+      <div className="flex-1 p-6 border-b">
+        <h3 className="font-medium mb-4">Missing Ingredients</h3>
+        <ScrollArea className="h-40">
+          <ul className="space-y-2">
+            {missingIngredients.map((ingredient, idx) => (
+              <li key={idx} className="text-sm flex items-start">
+                <span className="mr-2">•</span>
+                <span>{ingredient}</span>
+              </li>
+            ))}
+          </ul>
+        </ScrollArea>
+      </div>
+
+      {/* Send Email Button */}
+      <div className="p-6">
+        <Button className="w-full bg-black hover:bg-gray-800 text-white">
+          Start Cooking
+        </Button>
+      </div>
+    </div>
+  );
+}
