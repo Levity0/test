@@ -1,3 +1,5 @@
+"use client"
+
 import { Search, Filter, ChevronLeft, ChevronRight } from "lucide-react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
