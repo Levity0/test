@@ -28,6 +28,7 @@ app.get("/api/home", async (req, res) => {
     const rawMealsData = response.data.meals || []; // if meal db returns nothing response is an empty array instead of mapping error
     const organizedMeals = rawMealsData.map (meal =>({ 
       id: meal.idMeal,
+      image: meal.strMealThumb,
       name: meal.strMeal,
       category: meal.strCategory,
       area: meal.strArea,
@@ -56,6 +57,7 @@ app.get("/api/home/search", async (req, res) => {
     const rawMealsData = response.data.meals || [];
     const organizedMeals = rawMealsData.map (meal =>({ 
       id: meal.idMeal,
+      image: meal.strMealThumb,
       name: meal.strMeal,
       category: meal.strCategory,
       area: meal.strArea,
