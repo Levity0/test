@@ -15,14 +15,11 @@ app.get("/api/hello", (req, res) => {
 // display meals 
 app.get("/api/main", async (req, res) => {
   try {
-    // const { mealName } = req.query;
-    // if (!mealName){
-    //   return res.status(400).json({error: "please provide meal name"}); 
-    // }
     // fetch the data from meal db
     const response = await axios.get('https://www.themealdb.com/api/json/v1/1/search.php?f=a'); //www.themealdb.com/api/json/v1/1/search.php?f=a
     // organize data fetched from TheMealDB
-    const organizedMeals = response.data.meals.map (meal =>({ 
+    const rawMealsData = response.data.meals || []; // if meal db returns nothing response is an empty array instead of mapping error
+    const organizedMeals = rawMealsData.map (meal =>({ 
       id: meal.idMeal,
       name: meal.strMeal,
       category: meal.strCategory,
