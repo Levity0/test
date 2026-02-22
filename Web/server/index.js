@@ -13,10 +13,17 @@ app.get("/api/hello", (req, res) => {
 });
 
 // display meals 
-app.get("/api/main", async (req, res) => {
+app.get("/api/home", async (req, res) => {
   try {
+    const { letter } = req.query;
+    if (!letter){ // if null return error
+      return res.status(400).json({error: "please provide page letter"});
+    }
     // fetch the data from meal db
-    const response = await axios.get('https://www.themealdb.com/api/json/v1/1/search.php?f=a'); //www.themealdb.com/api/json/v1/1/search.php?f=a
+    const response = await axios.get('https://www.themealdb.com/api/json/v1/1/search.php?', {
+      params: { f: letter }
+    }); 
+    //www.themealdb.com/api/json/v1/1/search.php?f=a
     // organize data fetched from TheMealDB
     const rawMealsData = response.data.meals || []; // if meal db returns nothing response is an empty array instead of mapping error
     const organizedMeals = rawMealsData.map (meal =>({ 
@@ -35,10 +42,10 @@ app.get("/api/main", async (req, res) => {
 });
 
 // display meals based on search
-app.get("/api/search", async (req, res) => {
+app.get("/api/home/search", async (req, res) => {
   try {
     const { mealName }  = req.query;
-    if (!mealName){
+    if (!mealName){ // if null return error
       return res.status(400).json({error: "please provide meal name"}); 
     }
     // fetch the data from meal db
