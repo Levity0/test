@@ -1,4 +1,4 @@
-*Team Report Week 7*
+*Team Report Week 8*
 
 
 Goals for This week
@@ -15,7 +15,7 @@ Team Progress and Issues
 - We learned about integrating many systems together.
 - The team is finding it hard to understand how to use the CI testing.
 
-Goals Planned for week 8:
+Goals Planned for week 9:
 - Beta Release (7 days)
 - CI Testing (4 days) 
 
