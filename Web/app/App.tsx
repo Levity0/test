@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { PantryPanel } from "./components/PantryPanel";
-import { RecipeBrowser } from "./components/RecipeBrowser";
-import { RecipeCart } from "./components/RecipeCart";
-import { Button } from "./components/ui/button";
+import { PantryPanel } from "./app/components/PantryPanel";
+import { RecipeBrowser } from "./app/components/RecipeBrowser";
+import { RecipeCart } from "./app/components/RecipeCart";
+import { Button } from "./app/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function App() {
