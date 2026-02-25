@@ -53,14 +53,18 @@ Goals planned for next week: Finish my portion of our presentation (By 2/8), Dev
 - Start development of meal search feature (3 days)
 
 **Team progress and issues:**
-- **what team member did:** Finished my sections of the presentation, did research of our development tech stack, and began development of the general meal display feature for the backend. Now when running the server on local host using node meal information is displayed to the user.
-- **what worked:** Dividing up sections of the presentation made work much more efficient. We also held a meeting to research how to begin development using our chosen tech stack and we ended up refactoring our repository to be more organized.
-- **what team member learned:** Alex learned that it can be difficult to know where to start with web development due to the complexity of each component but that the node environment makes development much easier.
-- **Where team member had trouble and where team member is stuck:** Alex found that starting development felt daunting before this week but after the team discussed it where to begin beginning development became much easier.
-  
-Goals planned for next week:
-- Finish meal display feature (3 days) 
-- Begin development of meal search feature (3 days)
+- **what team member did:**
+Implemented the backend logic for display and search meals features which both take arguments from the request url, query the meal db, and then returns a json containing the key details for each meal.
+- **what worked:** 
+Our approach to developing our project has been similar to incremental development where we focus on each developing one to two features during a week. This has worked pretty well and we have most of the core features complete.
+- **what team member learned:**
+During this week I learned that development of backend features for our application is simpler than I initially believed.
+- **Where team member had trouble and where team member is stuck:**
+Currently I am stuck in the integration phase since we are attempting to get the front end integrated and built before proceeding further with development.
+**Goals planned for next week:**
+- Write unit test for display meals feature. (1 day)
+- Write unit test for search meals feature. (1 day)
+- Develop search by ingredients feature. (2 days)
 
 Team Member: Nico
 Goals planned for this week:
