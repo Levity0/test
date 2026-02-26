@@ -8,6 +8,10 @@
     "start": "next start",
     "lint": "eslint"
   },
+  "scripts": {
+  "test": "jest",
+  "test:ci": "jest --ci"
+  },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-alert-dialog": "^1.1.15",
