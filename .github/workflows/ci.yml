@@ -17,7 +17,11 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          node -v
+          npm -v
+          ls -la
+          npm ci --verbose
 
       - name: Run unit tests
         run: npm run test:ci
