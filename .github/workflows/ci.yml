@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./Web   # <-- change to the folder that has package.json
+        working-directory: ./Web/   # <-- change to the folder that has package.json
     steps:
       - uses: actions/checkout@v4
 
