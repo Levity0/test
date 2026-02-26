@@ -37,15 +37,15 @@ Goals planned for next week:
 
 
 Team Member: Levi
-Goals planned for this week: Work on the development of the recipe display and search. Create slides centered around testing out product and why our solution will work.
+Goals planned for this week: Implement filtering and tags search with meals. Integrate backend components with developed front end.
 
 Team progress and issues:
-- what team member did: Wrote the software architecture and design portions of our Living Doc, research tools to use for our development.
-- what worked: After doing research I found a working and free tool stack for us to use for development of our web app.
-- what team member learned: I learned that there are a lot of different tools we could use for web development that I had never heard of before. Ultimately I thought it would be best however, to choose a framework we all have some experience in.
-- where team member had trouble and where team member is stuck: I am feeling slightly confused/overwhelmed about starting development. I don't exactly know how best to begin implementing this project and how our src repo should be structured.
+- what team member did: Developed Supabase database for users, created login/out, signup, and ingredient toggle for users
+- what worked: Supabase was very easy to work with and made user development very easy.
+- what team member learned: I learned that there are vscode plugins to help test API calls, this made it very easy to validate my code.
+- where team member had trouble and where team member is stuck: I am feeling anxious about integrating backend and frontend components.
 
-Goals planned for next week: Finish my portion of our presentation (By 2/8), Develop Recipe display (By end of week 6), Develop Recipe search (By end of week 6, start of week 7)
+Goals planned for next week: Integrate all backend code with frontend code (end of week 9). Make sure edge case tests pass my backend development (Thursday week 9)
 
 **Team Member: Alex**
 **Goals planned for this week:**
