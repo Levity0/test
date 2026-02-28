@@ -1,26 +1,34 @@
 const supabase = require('../supabase');
 
 const Ingredient = {
-  // Add an ingredient
+  //add function
   async add(name, userId) {
     const { data, error } = await supabase
       .from('ingredients')
-      .insert([{ name, user_id: userId }])
+      .upsert(
+        { name: name, user_id: userId }, 
+        { onConflict: 'name, user_id' } 
+      )
       .select();
-    if (error) throw error;
+
+    if (error) {
+      console.error("Insert Error:", error);
+      throw error;
+    }
     return data;
   },
-
-  // Remove an ingredient
+  //remove function
   async remove(name, userId) {
     const { data, error } = await supabase
       .from('ingredients')
       .delete()
-      .eq('name', name)
-      .eq('user_id', userId); 
-    if (error) throw error;
+      .match({ name: name, user_id: userId }); 
+
+    if (error) {
+      console.error("Delete Error:", error);
+      throw error;
+    }
     return data;
   }
 };
-
 module.exports = Ingredient;

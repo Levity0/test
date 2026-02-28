@@ -1,7 +1,6 @@
-// server/controllers/ingredientController.js
 const Ingredient = require('../models/ingredientModel');
 
-// Ensure you have "exports.toggleIngredient ="
+// toggles if a user has an ingredient
 exports.toggleIngredient = async (req, res) => {
   const { name, userId, isSelected } = req.body;
   try {

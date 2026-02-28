@@ -1,18 +1,27 @@
 const express = require('express');
 const cors = require('cors');
+const app = express();
+
+//On deployment replace * with vercel url * means allow everything which is fine for now
+app.use(cors({
+  origin: '*', 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
+
+
 require('dotenv').config();
 
-// 1. Import the Routes
+// Import the Routes
 const authRoutes = require('./routes/authRoutes');
 const ingredientRoutes = require('./routes/ingredientRoutes');
 
-const app = express();
 
 // Middleware
-app.use(cors()); // Allows your React app to talk to this server
-app.use(express.json()); // Allows the server to read JSON data from the frontend
+app.use(cors()); 
+app.use(express.json()); 
 
-// 2. Use the Routes
+// Use the Routes
 // This means all auth routes will start with http://localhost:5000/api/auth
 app.use('/api/auth', authRoutes);
 

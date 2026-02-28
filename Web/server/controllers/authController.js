@@ -1,5 +1,6 @@
 const supabase = require('../supabase');
 
+// SIGN UP
 exports.signUp = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -11,6 +12,7 @@ exports.signUp = async (req, res) => {
   }
 };
 
+// LOGOUT
 exports.logout = async (req, res) => {
   const { error } = await supabase.auth.signOut();
   if (error) return res.status(400).json({ error: error.message });
