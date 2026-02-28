@@ -15,18 +15,25 @@ interface Recipe {
   hiddenCount: number;
 }
 
-export function RecipeBrowser() {
+export function RecipeBrowser({ initialData }: { initialData: any[] }) {
+  const [recipes, setRecipes] = useState(initialData || []);
   const [currentPage, setCurrentPage] = useState(1);
 
+  const fetchNewLetter = async (letter: string) => {
+    const res = await fetch(`http://localhost:5000/api/home?letter=${letter}`);
+    const data = await res.json();
+    setRecipes(data);
+  };
+
   // Mock data for recipes
-  const recipes: Recipe[] = Array(9).fill(null).map((_, i) => ({
-    id: i,
-    name: "Lola Mi's Halo Halo",
-    ingredientsOwned: 14,
-    totalIngredients: 14,
-    displayedIngredients: ["Milk", "Sugar", "Ice Cream"],
-    hiddenCount: 11,
-  }));
+  // const recipes: Recipe[] = Array(9).fill(null).map((_, i) => ({
+  //   id: i,
+  //   name: "Lola Mi's Halo Halo",
+  //   ingredientsOwned: 14,
+  //   totalIngredients: 14,
+  //   displayedIngredients: ["Milk", "Sugar", "Ice Cream"],
+  //   hiddenCount: 11,
+  // }));
 
   return (
     <div className="flex-1 flex flex-col h-screen">
@@ -61,7 +68,7 @@ export function RecipeBrowser() {
               {/* Recipe Image */}
               <div className="aspect-video w-full overflow-hidden bg-gray-100">
                 <img
-                  src="https://images.unsplash.com/photo-1707886114260-6ad8219bf2a7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYWxvJTIwaGFsbyUyMGZpbGlwaW5vJTIwZGVzc2VydHxlbnwxfHx8fDE3NzEyMTIxNDN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                  src={recipe.image}//"https://images.unsplash.com/photo-1707886114260-6ad8219bf2a7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYWxvJTIwaGFsbyUyMGZpbGlwaW5vJTIwZGVzc2VydHxlbnwxfHx8fDE3NzEyMTIxNDN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
                   alt={recipe.name}
                   className="w-full h-full object-cover"
                 />
@@ -76,12 +83,12 @@ export function RecipeBrowser() {
                   </Button>
                 </div>
 
-                <p className="text-sm text-gray-600 mb-3">
+                {/* <p className="text-sm text-gray-600 mb-3">
                   You have all {recipe.totalIngredients} ingredients
-                </p>
+                </p> */}
 
                 {/* Ingredient Tags */}
-                <div className="flex flex-wrap gap-1.5">
+                {/* <div className="flex flex-wrap gap-1.5">
                   {recipe.displayedIngredients.map((ingredient, idx) => (
                     <Badge
                       key={idx}
@@ -97,7 +104,7 @@ export function RecipeBrowser() {
                   >
                     +{recipe.hiddenCount}
                   </Badge>
-                </div>
+                </div> */}
               </div>
             </div>
           ))}

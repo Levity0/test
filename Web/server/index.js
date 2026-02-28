@@ -1,8 +1,10 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const axios = require("axios");
 
 const app = express();
+app.use(express.json()); 
 
 //On deployment replace * with vercel url * means allow everything which is fine for now
 app.use(cors({
@@ -12,11 +14,11 @@ app.use(cors({
 }));
 
 
-require('dotenv').config();
+// require('dotenv').config();
 
 // Import the Routes
-const authRoutes = require('./routes/authRoutes');
-const ingredientRoutes = require('./routes/ingredientRoutes');
+// const authRoutes = require('./routes/authRoutes');
+// const ingredientRoutes = require('./routes/ingredientRoutes');
 
 // display meals 
 app.get("/api/home", async (req, res) => {
@@ -78,17 +80,23 @@ app.get("/api/home/search", async (req, res) => {
 });
 
 // Middleware
-app.use(cors()); 
-app.use(express.json()); 
+// app.use(cors()); 
+
+
 
 // Use the Routes
 // This means all auth routes will start with http://localhost:5000/api/auth
-app.use('/api/auth', authRoutes);
+// app.use('/api/auth', authRoutes);
 
 // This means ingredient routes will start with http://localhost:5000/api/ingredients
-app.use('/api/ingredients', ingredientRoutes);
+// app.use('/api/ingredients', ingredientRoutes);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+// // Add to the very end of index.js
+// setInterval(() => {
+//   // Keeping the process alive
+// }, 10000);
