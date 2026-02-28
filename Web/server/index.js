@@ -17,8 +17,8 @@ app.use(cors({
 // require('dotenv').config();
 
 // Import the Routes
-// const authRoutes = require('./routes/authRoutes');
-// const ingredientRoutes = require('./routes/ingredientRoutes');
+const authRoutes = require('./routes/authRoutes');
+const ingredientRoutes = require('./routes/ingredientRoutes');
 
 // display meals 
 app.get("/api/home", async (req, res) => {
@@ -86,10 +86,10 @@ app.get("/api/home/search", async (req, res) => {
 
 // Use the Routes
 // This means all auth routes will start with http://localhost:5000/api/auth
-// app.use('/api/auth', authRoutes);
+app.use('/api/auth', authRoutes);
 
 // This means ingredient routes will start with http://localhost:5000/api/ingredients
-// app.use('/api/ingredients', ingredientRoutes);
+app.use('/api/ingredients', ingredientRoutes);
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
