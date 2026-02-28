@@ -17,6 +17,7 @@ export default function App() {
       {!isPantryOpen && (
         <div className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10">
           <Button
+            aria-label="Open pantry"
             variant="outline"
             size="icon"
             className="rounded-r-lg rounded-l-none shadow-md"
@@ -33,6 +34,7 @@ export default function App() {
         {isPantryOpen && (
           <div className="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 z-10">
             <Button
+              aria-label="Close pantry"
               variant="outline"
               size="icon"
               className="rounded-full shadow-md bg-white"
@@ -52,6 +54,7 @@ export default function App() {
         {isCartOpen && (
           <div className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
             <Button
+              aria-label="Close cart"
               variant="outline"
               size="icon"
               className="rounded-full shadow-md bg-white"
@@ -68,6 +71,7 @@ export default function App() {
       {!isCartOpen && (
         <div className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10">
           <Button
+            aria-label="Open cart"
             variant="outline"
             size="icon"
             className="rounded-l-lg rounded-r-none shadow-md"
