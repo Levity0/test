@@ -1,3 +1,5 @@
+"use client"
+
 import { useState } from "react";
 import { PantryPanel } from "./components/PantryPanel";
 import { RecipeBrowser } from "./components/RecipeBrowser";
