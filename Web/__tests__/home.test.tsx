@@ -3,5 +3,5 @@ import Page from "../app/page";
 
 test("renders page", () => {
   render(<Page />);
-  expect(screen.getByRole("main")).toBeInTheDocument();
+  expect(screen.getByTestId("page-root")).toBeInTheDocument();
 });

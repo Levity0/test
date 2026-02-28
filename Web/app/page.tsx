@@ -12,7 +12,7 @@ export default function App() {
   const [isCartOpen, setIsCartOpen] = useState(true);
 
   return (
-    <div className="flex h-screen bg-white overflow-hidden min-w-[1200px]">
+    <div data-testid="page-root" className="flex h-screen bg-white overflow-hidden min-w-[1200px]">
       {/* Pantry Toggle */}
       {!isPantryOpen && (
         <div className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10">
