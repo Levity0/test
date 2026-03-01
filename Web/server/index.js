@@ -21,7 +21,7 @@ const authRoutes = require('./routes/authRoutes');
 const ingredientRoutes = require('./routes/ingredientRoutes');
 
 // display meals 
-app.get("/api/home", async (req, res) => {
+app.get("https://beavgredients.vercel.app", async (req, res) => { // used to be /api/home
   try {
     const { letter } = req.query;
     if (!letter){ // if null return error
@@ -51,7 +51,7 @@ app.get("/api/home", async (req, res) => {
 });
 
 // display meals based on search
-app.get("/api/home/search", async (req, res) => {
+app.get("https://beavgredients.vercel.app", async (req, res) => {
   try {
     const { mealName }  = req.query;
     if (!mealName){ // if null return error
