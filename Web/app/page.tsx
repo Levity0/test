@@ -8,9 +8,9 @@ import { Button } from "./components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 
-async function getRecipes(){
+async function getRecipes(letter: string = "a"){
   const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001'
-  const res = await fetch(`${apiBase}/home?letter=a`, { ///api/home?letter=a
+  const res = await fetch(`${apiBase}/home?letter=${letter}`, { ///api/home?letter=a
     cache: 'no-store', // ensure fresh data every request
   });
   if (!res.ok){
@@ -27,7 +27,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getRecipes().then(data =>{
+    getRecipes("a").then(data =>{
       setRecipes(data);
       setLoading(false);
     })
