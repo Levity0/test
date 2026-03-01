@@ -1,15 +1,45 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PantryPanel } from "./components/PantryPanel";
 import { RecipeBrowser } from "./components/RecipeBrowser";
 import { RecipeCart } from "./components/RecipeCart";
 import { Button } from "./components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+
+async function getRecipes(letter: string = "a"){
+  //const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001'
+  const res = await fetch(`/home?letter=${letter}`, { ///api/home?letter=a
+    cache: 'no-store', // ensure fresh data every request
+  });
+  if (!res.ok){
+    throw new Error('Failed to fetch data');
+  }
+  return res.json();//[{id: 1, name: "Test Pasta", image: "https://placehold.co"}];//res.json();
+}
+
 export default function App() {
   const [isPantryOpen, setIsPantryOpen] = useState(true);
   const [isCartOpen, setIsCartOpen] = useState(true);
+
+  const [recipes, setRecipes] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getRecipes("a").then(data =>{
+      setRecipes(data);
+      setLoading(false);
+    })
+    .catch(err => {
+      console.error(err);
+      
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) return <div>Loading...</div>
+
 
   return (
     <div data-testid="page-root" className="flex h-screen bg-white overflow-hidden min-w-[1200px]">
@@ -47,7 +77,7 @@ export default function App() {
       </div>
 
       {/* Middle Panel Recipe Browser */}
-      <RecipeBrowser />
+      <RecipeBrowser initialData={recipes}/>
 
       {/* Right Panel - Recipe Cart */}
       <div className="relative">

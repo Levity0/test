@@ -15,24 +15,41 @@ interface Recipe {
   hiddenCount: number;
 }
 
-export function RecipeBrowser() {
+export function RecipeBrowser({ initialData }: { initialData: any[] }) {
+  const [recipes, setRecipes] = useState(initialData || []);
   const [currentPage, setCurrentPage] = useState(1);
+  const [activeLetter, setActiveLetter] = useState("a")
+
+  const fetchNewLetter = async (letter: string) => {
+    setActiveLetter(letter);
+    try{
+      //const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001'
+      const res = await fetch(`/home?letter=${letter}`);
+      const data = await res.json();
+      setRecipes(data);
+      setCurrentPage(1);
+    }catch (err){
+      console.error("Failed to fetch new letter:", err);
+    }
+    
+  };
+  const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 
   // Mock data for recipes
-  const recipes: Recipe[] = Array(9).fill(null).map((_, i) => ({
-    id: i,
-    name: "Lola Mi's Halo Halo",
-    ingredientsOwned: 14,
-    totalIngredients: 14,
-    displayedIngredients: ["Milk", "Sugar", "Ice Cream"],
-    hiddenCount: 11,
-  }));
+  // const recipes: Recipe[] = Array(9).fill(null).map((_, i) => ({
+  //   id: i,
+  //   name: "Lola Mi's Halo Halo",
+  //   ingredientsOwned: 14,
+  //   totalIngredients: 14,
+  //   displayedIngredients: ["Milk", "Sugar", "Ice Cream"],
+  //   hiddenCount: 11,
+  // }));
 
   return (
     <div className="flex-1 flex flex-col h-screen">
       {/* Header */}
       <div className="p-6 border-b">
-        <h1 className="text-2xl font-semibold mb-4">Beavgridients</h1>
+        <h1 className="text-2xl font-semibold mb-4">Beavgredients</h1>
 
         {/* Search and Filter */}
         <div className="flex gap-3">
@@ -61,7 +78,7 @@ export function RecipeBrowser() {
               {/* Recipe Image */}
               <div className="aspect-video w-full overflow-hidden bg-gray-100">
                 <img
-                  src="https://images.unsplash.com/photo-1707886114260-6ad8219bf2a7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYWxvJTIwaGFsbyUyMGZpbGlwaW5vJTIwZGVzc2VydHxlbnwxfHx8fDE3NzEyMTIxNDN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                  src={recipe.image}
                   alt={recipe.name}
                   className="w-full h-full object-cover"
                 />
@@ -76,12 +93,12 @@ export function RecipeBrowser() {
                   </Button>
                 </div>
 
-                <p className="text-sm text-gray-600 mb-3">
+                {/* <p className="text-sm text-gray-600 mb-3">
                   You have all {recipe.totalIngredients} ingredients
-                </p>
+                </p> */}
 
                 {/* Ingredient Tags */}
-                <div className="flex flex-wrap gap-1.5">
+                {/* <div className="flex flex-wrap gap-1.5">
                   {recipe.displayedIngredients.map((ingredient, idx) => (
                     <Badge
                       key={idx}
@@ -97,7 +114,7 @@ export function RecipeBrowser() {
                   >
                     +{recipe.hiddenCount}
                   </Badge>
-                </div>
+                </div> */}
               </div>
             </div>
           ))}
@@ -105,28 +122,21 @@ export function RecipeBrowser() {
       </div>
 
       {/* Pagination */}
-      <div className="p-6 border-t">
-        <div className="flex items-center justify-center gap-2">
-          <Button variant="ghost" size="icon">
-            <ChevronLeft className="h-4 w-4" />
-          </Button>
-          <Button variant="ghost" size="sm" className={currentPage === 1 ? "bg-gray-100" : ""}>
-            1
-          </Button>
-          <Button variant="ghost" size="sm" className={currentPage === 2 ? "bg-gray-100" : ""}>
-            2
-          </Button>
-          <Button variant="ghost" size="sm" className={currentPage === 3 ? "bg-gray-100" : ""}>
-            3
-          </Button>
-          <span className="px-2 text-gray-400">...</span>
-          <Button variant="ghost" size="sm">
-            7
-          </Button>
-          <Button variant="ghost" size="icon">
-            <ChevronRight className="h-4 w-4" />
-          </Button>
-        </div>
+      <div className="flex flex-wrap gap-1.5 mb-4 max-w-full">
+           {alphabet.map((letter) => (
+            <Button
+              key={letter}
+              variant={activeLetter === letter ? "default" : "outline"}
+              size="sm"
+              className={`uppercase w-8 h-8 p-0 text-xs shrink-0 ${
+                activeLetter === letter ? "bg-green-500 hover:bg-green-700" : ""
+              }`}
+              onClick={() => fetchNewLetter(letter)}
+            >
+              {letter}
+            </Button>
+          ))}
+        
       </div>
     </div>
   );

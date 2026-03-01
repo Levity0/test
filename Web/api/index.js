@@ -1,25 +1,27 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const axios = require("axios");
 
 const app = express();
+app.use(express.json()); 
 
 //On deployment replace * with vercel url * means allow everything which is fine for now
 app.use(cors({
-  origin: '*', 
+  origin: '*', //https://beavgredients.vercel.app
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
 
 
-require('dotenv').config();
+// require('dotenv').config();
 
 // Import the Routes
 const authRoutes = require('./routes/authRoutes');
 const ingredientRoutes = require('./routes/ingredientRoutes');
 
 // display meals 
-app.get("/api/home", async (req, res) => {
+app.get("/home", async (req, res) => { // used to be /api/home
   try {
     const { letter } = req.query;
     if (!letter){ // if null return error
@@ -49,7 +51,7 @@ app.get("/api/home", async (req, res) => {
 });
 
 // display meals based on search
-app.get("/api/home/search", async (req, res) => {
+app.get("/search", async (req, res) => {
   try {
     const { mealName }  = req.query;
     if (!mealName){ // if null return error
@@ -78,8 +80,9 @@ app.get("/api/home/search", async (req, res) => {
 });
 
 // Middleware
-app.use(cors()); 
-app.use(express.json()); 
+// app.use(cors()); 
+
+
 
 // Use the Routes
 // This means all auth routes will start with http://localhost:5000/api/auth
@@ -88,7 +91,11 @@ app.use('/api/auth', authRoutes);
 // This means ingredient routes will start with http://localhost:5000/api/ingredients
 app.use('/api/ingredients', ingredientRoutes);
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+module.exports = app;
+
+if (process.env.NODE_ENV !== 'production'){
+  const PORT = process.env.PORT || 5001;
+  app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+}
