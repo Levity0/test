@@ -95,8 +95,3 @@ const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
-// // Add to the very end of index.js
-// setInterval(() => {
-//   // Keeping the process alive
-// }, 10000);
