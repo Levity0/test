@@ -8,7 +8,7 @@ app.use(express.json());
 
 //On deployment replace * with vercel url * means allow everything which is fine for now
 app.use(cors({
-  origin: '*', 
+  origin: 'https://beavgredients.vercel.app', 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
@@ -95,3 +95,5 @@ const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+module.exports = app;
