@@ -9,7 +9,6 @@ import { render, screen, waitFor } from "@testing-library/react";
 import Page from "../app/page";
 import '@testing-library/jest-dom'; 
 
-// 1. Mock the fetch globally before tests run
 global.fetch = jest.fn(() =>
   Promise.resolve({
     ok: true,
@@ -20,8 +19,6 @@ global.fetch = jest.fn(() =>
 test("renders page after loading", async () => {
   render(<Page />);
 
-  // 2. Use 'waitFor' to handle the 'act' and the async transition
-  // This waits for 'Loading...' to disappear and 'page-root' to appear
   await waitFor(() => {
     expect(screen.getByTestId("page-root")).toBeInTheDocument();
   });
