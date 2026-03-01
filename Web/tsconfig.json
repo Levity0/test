@@ -30,6 +30,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "api/send-email/route.js"  ],
   "exclude": ["node_modules"]
 }
