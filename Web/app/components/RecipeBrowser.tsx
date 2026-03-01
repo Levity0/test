@@ -24,7 +24,7 @@ export function RecipeBrowser({ initialData }: { initialData: any[] }) {
     setActiveLetter(letter);
     try{
       const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001'
-      const res = await fetch(`${apiBase}/api/home?letter=${letter}`);
+      const res = await fetch(`${apiBase}/home?letter=${letter}`);
       const data = await res.json();
       setRecipes(data);
       setCurrentPage(1);
