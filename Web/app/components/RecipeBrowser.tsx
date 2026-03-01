@@ -28,27 +28,95 @@ export function RecipeBrowser() {
     hiddenCount: 11,
   }));
 
+const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+const handleFilterSelect = (filterName: string) => {
+  console.log("Selected filter:", filterName);
+  setIsFilterOpen(false); // Closes dropdown after selection
+};
+
   return (
     <div className="flex-1 flex flex-col h-screen">
       {/* Header */}
       <div className="p-6 border-b">
         <h1 className="text-2xl font-semibold mb-4">Beavgridients</h1>
 
-        {/* Search and Filter */}
-        <div className="flex gap-3">
-          <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-            <Input
-              placeholder="Find..."
-              className="pl-10"
-            />
-          </div>
-          <Button variant="outline" className="gap-2">
+      {/* Search and Filter */}
+      <div className="flex gap-3">
+        <div className="flex-1 relative">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+          <Input
+            placeholder="Find..."
+            className="pl-10"
+          />
+        </div>
+
+        {/* --- DROPDOWN START --- */}
+        <div className="relative">
+          <Button 
+            variant="outline" 
+            className="gap-2"
+            onClick={() => setIsFilterOpen(!isFilterOpen)}
+          >
             <Filter className="h-4 w-4" />
             Filter
           </Button>
+
+          {isFilterOpen && (
+            <>
+              {/* Invisible overlay to close dropdown on outside click */}
+              <div 
+                className="fixed inset-0 z-10" 
+                onClick={() => setIsFilterOpen(false)} 
+              />
+              
+              <div className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-md shadow-lg z-20 py-1 overflow-hidden">
+                <div className="px-3 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider bg-gray-50">
+                  Pantry Filters
+                </div>
+                <button 
+                  onClick={() => {
+                    handleFilterSelect('matching');
+                    setIsFilterOpen(false);
+                  }}
+                  className="w-full text-left px-4 py-2 text-sm hover:bg-green-50 hover:text-green-700 transition-colors"
+                >
+                  My Ingredients
+                </button>
+                <button 
+                  onClick={() => {
+                    handleFilterSelect('plus-one');
+                    setIsFilterOpen(false);
+                  }}
+                  className="w-full text-left px-4 py-2 text-sm hover:bg-orange-50 hover:text-orange-700 transition-colors"
+                >
+                  Missing 1 Ingredient
+                </button>
+
+                <div className="h-px bg-gray-100 my-1" />
+
+                <div className="px-3 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider bg-gray-50">
+                  Meal Type
+                </div>
+                {['Vegetarian', 'Vegan', 'Breakfast', 'Dessert'].map((label) => (
+                  <button 
+                    key={label}
+                    onClick={() => {
+                      handleFilterSelect(label);
+                      setIsFilterOpen(false);
+                    }}
+                    className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition-colors"
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
         </div>
+        {/* --- DROPDOWN END --- */}
       </div>
+    </div>
 
       {/* Recipe Grid */}
       <div className="flex-1 overflow-y-auto p-6">
