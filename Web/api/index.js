@@ -91,7 +91,11 @@ app.use('/api/auth', authRoutes);
 // This means ingredient routes will start with http://localhost:5000/api/ingredients
 app.use('/api/ingredients', ingredientRoutes);
 
-const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => {
+module.exports = app;
+
+if (process.env.NODE_ENV !== 'production'){
+  const PORT = process.env.PORT || 5001;
+  app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+}

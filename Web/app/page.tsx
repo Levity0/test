@@ -9,8 +9,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 
 async function getRecipes(letter: string = "a"){
-  const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001'
-  const res = await fetch(`${apiBase}/home?letter=${letter}`, { ///api/home?letter=a
+  //const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001'
+  const res = await fetch(`/home?letter=${letter}`, { ///api/home?letter=a
     cache: 'no-store', // ensure fresh data every request
   });
   if (!res.ok){
