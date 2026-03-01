@@ -11,8 +11,8 @@
     }
   ],
   "rewrites": [
-    { "source": "/home", "destination": "server/index.js" },
-    { "source": "/search", "destination": "server/index.js" },
-    { "source": "/api/:match*", "destination": "server/index.js" }
+    { "source": "/home", "destination": "/server/index.js" },
+    { "source": "/search", "destination": "/server/index.js" },
+    { "source": "/api/:match*", "destination": "/server/index.js" }
   ]
 }
