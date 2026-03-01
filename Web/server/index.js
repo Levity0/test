@@ -18,6 +18,7 @@ require('dotenv').config();
 // Import the Routes
 const authRoutes = require('./routes/authRoutes');
 const ingredientRoutes = require('./routes/ingredientRoutes');
+const mealRoutes = require('./routes/mealRoutes');
 
 // display meals 
 app.get("/api/home", async (req, res) => {
@@ -85,6 +86,8 @@ app.use('/api/auth', authRoutes);
 
 // This means ingredient routes will start with http://localhost:5000/api/ingredients
 app.use('/api/ingredients', ingredientRoutes);
+
+app.use('/api/meals', mealRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

@@ -6,6 +6,8 @@ import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { useState } from "react";
 
+const TEST_USER_ID = "cc83483f-40ee-47f1-87eb-62c962c279bc";
+
 interface Recipe {
   id: number;
   name: string;
@@ -15,25 +17,69 @@ interface Recipe {
   hiddenCount: number;
 }
 
-export function RecipeBrowser() {
+export function RecipeBrowser({ initialData }: { initialData: any[] }) {
+  const [recipes, setRecipes] = useState(initialData || []);
   const [currentPage, setCurrentPage] = useState(1);
+  const [activeLetter, setActiveLetter] = useState("a")
 
-  // Mock data for recipes
-  const recipes: Recipe[] = Array(9).fill(null).map((_, i) => ({
-    id: i,
-    name: "Lola Mi's Halo Halo",
-    ingredientsOwned: 14,
-    totalIngredients: 14,
-    displayedIngredients: ["Milk", "Sugar", "Ice Cream"],
-    hiddenCount: 11,
-  }));
+  const fetchNewLetter = async (letter: string) => {
+    setActiveLetter(letter);
+    try{
+      const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001'
+      const res = await fetch(`${apiBase}/api/home?letter=${letter}`);
+      const data = await res.json();
+      setRecipes(data);
+      setCurrentPage(1);
+    }catch (err){
+      console.error("Failed to fetch new letter:", err);
+    }
+    
+  };
+  const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+
+   // Mock data for recipes
+  // const recipes: Recipe[] = Array(9).fill(null).map((_, i) => ({
+  //   id: i,
+  //   name: "Lola Mi's Halo Halo",
+  //   ingredientsOwned: 14,
+  //   totalIngredients: 14,
+  //   displayedIngredients: ["Milk", "Sugar", "Ice Cream"],
+  //   hiddenCount: 11,
+  // }));
+
+  //drop down filter function
 
 const [isFilterOpen, setIsFilterOpen] = useState(false);
+const [isLoading, setIsLoading] = useState(false);
 
-const handleFilterSelect = (filterName: string) => {
-  console.log("Selected filter:", filterName);
-  setIsFilterOpen(false); // Closes dropdown after selection
+const handleFilterSelect = async (filterName: string) => {
+  setIsFilterOpen(false);
+  setIsLoading(true);
+  const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001';
+
+  try { 
+    const res = await fetch(`${apiBase}/api/meals/filter`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: filterName, userId: TEST_USER_ID }),
+    });
+
+    const data = await res.json();
+    
+    // This is the "Magic Fix" line:
+    // It checks if 'data.meals' exists (Standard API) 
+    // OR if 'data' is already the list (Your Pantry API)
+    const mealArray = data.meals ? data.meals : (Array.isArray(data) ? data : []);
+    
+    setRecipes(mealArray);
+  } catch (err) {
+    console.error("Filtering failed:", err);
+    setRecipes([]);
+  } finally {
+    setIsLoading(false);
+  }
 };
+
 
   return (
     <div className="flex-1 flex flex-col h-screen">
@@ -118,84 +164,99 @@ const handleFilterSelect = (filterName: string) => {
       </div>
     </div>
 
-      {/* Recipe Grid */}
+{/* Recipe Grid */}
       <div className="flex-1 overflow-y-auto p-6">
-        <div className="grid grid-cols-3 gap-4">
-          {recipes.map((recipe) => (
-            <div
-              key={recipe.id}
-              className="border rounded-lg overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow cursor-pointer"
-            >
-              {/* Recipe Image */}
-              <div className="aspect-video w-full overflow-hidden bg-gray-100">
-                <img
-                  src="https://images.unsplash.com/photo-1707886114260-6ad8219bf2a7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYWxvJTIwaGFsbyUyMGZpbGlwaW5vJTIwZGVzc2VydHxlbnwxfHx8fDE3NzEyMTIxNDN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                  alt={recipe.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
+        {isLoading ? (
+          /* Loading State */
+          <div className="flex flex-col items-center justify-center h-64 text-gray-500">
+            <div className="animate-spin h-8 w-8 border-4 border-green-500 border-t-transparent rounded-full mb-4"></div>
+            <p className="animate-pulse">Searching your pantry...</p>
+          </div>
+        ) : recipes.length > 0 ? (
+          /* Results Found */
+          <div className="grid grid-cols-3 gap-4">
+            {recipes.map((recipe, index) => {
+              // Variables to handle different API naming conventions
+              const recipeName = recipe.name || recipe.strMeal || "Unknown Recipe";
+              const recipeImage = recipe.image || recipe.strMealThumb;
+              console.log("DEBUG - Current Recipes:", recipes);
 
-              {/* Recipe Info */}
-              <div className="p-4">
-                <div className="flex items-start justify-between mb-2">
-                  <h3 className="font-medium">{recipe.name}</h3>
-                  <Button size="icon" className="h-8 w-8 rounded-full bg-green-500 hover:bg-green-600 shrink-0">
-                    <span className="text-white text-lg">+</span>
-                  </Button>
+              return (
+                <div
+                  key={recipe.id || recipe.idMeal || `recipe-${index}`}
+                  className="border rounded-lg overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+                >
+                  {/* Recipe Image */}
+                  <div className="aspect-video w-full overflow-hidden bg-gray-100">
+                    <img
+                      src={recipeImage}
+                      alt={recipeName}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  {/* Recipe Info */}
+                  <div className="p-4">
+                    <div className="flex items-start justify-between mb-2">
+                      <h3 className="font-medium text-sm line-clamp-1">{recipeName}</h3>
+                      <Button size="icon" className="h-8 w-8 rounded-full bg-green-500 hover:bg-green-600 shrink-0">
+                        <span className="text-white text-lg">+</span>
+                      </Button>
+                    </div>
+
+                    {/* Ingredient Tags */}
+                    <div className="flex flex-wrap gap-1.5 mt-2">
+                      {recipe.displayedIngredients?.map((ingredient: string, idx: number) => (
+                        <Badge
+                          key={idx}
+                          variant="secondary"
+                          className="bg-gray-100 text-gray-700 text-[10px]"
+                        >
+                          {ingredient}
+                        </Badge>
+                      ))}
+                      {recipe.hiddenCount > 0 && (
+                        <Badge
+                          variant="secondary"
+                          className="bg-gray-100 text-gray-500 text-[10px]"
+                        >
+                          +{recipe.hiddenCount}
+                        </Badge>
+                      )}
+                    </div>
+                  </div>
                 </div>
-
-                <p className="text-sm text-gray-600 mb-3">
-                  You have all {recipe.totalIngredients} ingredients
-                </p>
-
-                {/* Ingredient Tags */}
-                <div className="flex flex-wrap gap-1.5">
-                  {recipe.displayedIngredients.map((ingredient, idx) => (
-                    <Badge
-                      key={idx}
-                      variant="secondary"
-                      className="bg-gray-100 text-gray-700 hover:bg-gray-100"
-                    >
-                      {ingredient}
-                    </Badge>
-                  ))}
-                  <Badge
-                    variant="secondary"
-                    className="bg-gray-100 text-gray-700 hover:bg-gray-100"
-                  >
-                    +{recipe.hiddenCount}
-                  </Badge>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+              );
+            })}
+          </div> /* End of Grid Div */
+        ) : (
+          /* No Results Found UI */
+          <div className="flex flex-col items-center justify-center h-64 text-gray-500">
+            <Search className="h-10 w-10 mb-2 opacity-20" />
+            <p className="text-lg font-medium">No recipes found</p>
+            <p className="text-sm">Try adding more items to your pantry.</p>
+          </div>
+        )}
       </div>
 
       {/* Pagination */}
-      <div className="p-6 border-t">
-        <div className="flex items-center justify-center gap-2">
-          <Button variant="ghost" size="icon">
-            <ChevronLeft className="h-4 w-4" />
-          </Button>
-          <Button variant="ghost" size="sm" className={currentPage === 1 ? "bg-gray-100" : ""}>
-            1
-          </Button>
-          <Button variant="ghost" size="sm" className={currentPage === 2 ? "bg-gray-100" : ""}>
-            2
-          </Button>
-          <Button variant="ghost" size="sm" className={currentPage === 3 ? "bg-gray-100" : ""}>
-            3
-          </Button>
-          <span className="px-2 text-gray-400">...</span>
-          <Button variant="ghost" size="sm">
-            7
-          </Button>
-          <Button variant="ghost" size="icon">
-            <ChevronRight className="h-4 w-4" />
-          </Button>
+      <div className="p-6 border-t bg-white">
+        <div className="flex flex-wrap gap-1.5 max-w-full">
+          {alphabet.map((letter) => (
+            <Button
+              key={letter}
+              variant={activeLetter === letter ? "default" : "outline"}
+              size="sm"
+              className={`uppercase w-8 h-8 p-0 text-xs shrink-0 ${
+                activeLetter === letter ? "bg-green-500 hover:bg-green-700" : ""
+              }`}
+              onClick={() => fetchNewLetter(letter)}
+            >
+              {letter}
+            </Button>
+          ))}
         </div>
       </div>
-    </div>
+    </div> /* End of Main Flex Container */
   );
 }

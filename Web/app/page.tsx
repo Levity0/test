@@ -1,22 +1,50 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PantryPanel } from "./components/PantryPanel";
 import { RecipeBrowser } from "./components/RecipeBrowser";
 import { RecipeCart } from "./components/RecipeCart";
 import { Button } from "./components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+async function getRecipes(){
+  const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'
+  const res = await fetch(`${apiBase}/api/home?letter=a`, {
+    cache: 'no-store', // ensure fresh data every request
+  });
+  if (!res.ok){
+    throw new Error('Failed to fetch data');
+  }
+  return res.json();//[{id: 1, name: "Test Pasta", image: "https://placehold.co"}];//res.json();
+}
+
 export default function App() {
   const [isPantryOpen, setIsPantryOpen] = useState(true);
   const [isCartOpen, setIsCartOpen] = useState(true);
 
+  const [recipes, setRecipes] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getRecipes().then(data =>{
+      setRecipes(data);
+      setLoading(false);
+    })
+    .catch(err => {
+      console.error(err);
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) return <div>Loading...</div>
+
   return (
-    <div className="flex h-screen bg-white overflow-hidden min-w-[1200px]">
+     <div data-testid="page-root" className="flex h-screen bg-white overflow-hidden min-w-[1200px]">
       {/* Pantry Toggle */}
       {!isPantryOpen && (
         <div className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10">
           <Button
+            aria-label="Open pantry"
             variant="outline"
             size="icon"
             className="rounded-r-lg rounded-l-none shadow-md"
@@ -33,6 +61,7 @@ export default function App() {
         {isPantryOpen && (
           <div className="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 z-10">
             <Button
+              aria-label="Close pantry"
               variant="outline"
               size="icon"
               className="rounded-full shadow-md bg-white"
@@ -45,13 +74,14 @@ export default function App() {
       </div>
 
       {/* Middle Panel Recipe Browser */}
-      <RecipeBrowser />
+      <RecipeBrowser initialData={recipes}/>
 
       {/* Right Panel - Recipe Cart */}
       <div className="relative">
         {isCartOpen && (
           <div className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
             <Button
+              aria-label="Close cart"
               variant="outline"
               size="icon"
               className="rounded-full shadow-md bg-white"
@@ -68,6 +98,7 @@ export default function App() {
       {!isCartOpen && (
         <div className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10">
           <Button
+            aria-label="Open cart"
             variant="outline"
             size="icon"
             className="rounded-l-lg rounded-r-none shadow-md"
