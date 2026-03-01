@@ -4,20 +4,15 @@
     {
       "src": "server/index.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
     }
   ],
   "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/server/index.js"
-    },
-    {
-      "source": "/home",
-      "destination": "/server/index.js"
-    },
-    {
-      "source": "/search",
-      "destination": "/server/index.js"
-    }
+    { "source": "/home", "destination": "server/index.js" },
+    { "source": "/search", "destination": "server/index.js" },
+    { "source": "/api/:match*", "destination": "server/index.js" }
   ]
 }
