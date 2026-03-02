@@ -1,5 +1,6 @@
-"use client"
+"use client";
 
+import { useMemo, useState } from "react";
 import { X } from "lucide-react";
 import { Button } from "./ui/button";
 import { ScrollArea } from "./ui/scroll-area";
@@ -10,12 +11,54 @@ interface SelectedRecipe {
 }
 
 export function RecipeCart({ isOpen }: { isOpen: boolean }) {
+  const [isSending, setIsSending] = useState(false);
+  const [status, setStatus] = useState<string | null>(null);
+
   const selectedRecipes: SelectedRecipe[] = [
     { id: 1, name: "Lola Mi's Halo Halo" },
     { id: 2, name: "Lola Mi's Halo Halo" },
   ];
 
   const missingIngredients = ["Milk", "Mango", "Cereal", "Marshmallows"];
+
+  const emailBody = useMemo(() => {
+    const recipeLines = selectedRecipes.map(r => `- ${r.name}`).join("\n");
+    const ingredientLines = missingIngredients.map(i => `- ${i}`).join("\n");
+    return `Your BeavGredients Cooking Plan\n\nSelected Recipes:\n${recipeLines}\n\nMissing Ingredients:\n${ingredientLines}\n`;
+  }, [selectedRecipes, missingIngredients]);
+
+  async function handleStartCooking() {
+    setStatus(null);
+
+    // TODO: replace this with the signed-in user's email later
+    const to = window.prompt("What email should I send your shopping list to?");
+    if (!to) return;
+
+    setIsSending(true);
+    try {
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          to,
+          subject: "Your BeavGredients Shopping List",
+          message: emailBody,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data?.error || "Failed to send email");
+      }
+
+      setStatus("Email sent! Check your inbox.");
+    } catch (err: any) {
+      setStatus(`Failed to send: ${err.message}`);
+    } finally {
+      setIsSending(false);
+    }
+  }
 
   if (!isOpen) return null;
 
@@ -54,11 +97,11 @@ export function RecipeCart({ isOpen }: { isOpen: boolean }) {
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
             <span className="text-gray-600">Total Recipes:</span>
-            <span className="font-medium">2</span>
+            <span className="font-medium">{selectedRecipes.length}</span>
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-gray-600">Missing Ingredients:</span>
-            <span className="font-medium">4</span>
+            <span className="font-medium">{missingIngredients.length}</span>
           </div>
         </div>
       </div>
@@ -79,10 +122,16 @@ export function RecipeCart({ isOpen }: { isOpen: boolean }) {
       </div>
 
       {/* Send Email Button */}
-      <div className="p-6">
-        <Button className="w-full bg-black hover:bg-gray-800 text-white">
-          Start Cooking
+      <div className="p-6 space-y-2">
+        <Button
+          className="w-full bg-black hover:bg-gray-800 text-white"
+          onClick={handleStartCooking}
+          disabled={isSending}
+        >
+          {isSending ? "Sending..." : "Start Cooking"}
         </Button>
+
+        {status && <p className="text-sm">{status}</p>}
       </div>
     </div>
   );
