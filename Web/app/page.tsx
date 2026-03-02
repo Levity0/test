@@ -6,7 +6,7 @@ import { RecipeBrowser } from "./components/RecipeBrowser";
 import { RecipeCart } from "./components/RecipeCart";
 import { Button } from "./components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import supabase from "@/api/supabase"; // Ensure this path matches your project structure
+import {supabase} from "@/api/supabase"; // Ensure this path matches your project structure
 
 // Mock User ID - Ensure this matches the ID used in your Supabase 'ingredients' table
 const TEST_USER_ID = "cc83483f-40ee-47f1-87eb-62c962c279bc";
