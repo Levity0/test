@@ -54,44 +54,46 @@ Make sure the following are installed on your machine:
 - npm (comes with Node)
 
 You can verify installation with:
-
-node -v  
-npm -v
-
+    ```sh
+    node -v
+    ```  
+    ```sh
+    npm -v
+    ```
 ### Instalation
 
 1. Clone the repository:
-
-   git clone https://github.com/YOUR-ORG/YOUR-REPO.git
-
+   ```sh
+   git clone https://github.com/robekenn/Beavgredients
+   ```
 2. Navigate into the project directory:
-
+   ```sh
    cd beavgredients
-
+   ```
 3. Install dependencies:
-
+   ```sh
    npm install
-
+   ```
 4. Start the development server:
-
+   ```sh
    npm run dev
-
+   ```
 5. Open your browser and go to:
-
+   ```sh
    http://localhost:3000
-
+   ```
 The application should now be running locally.
 
 ### Build Production
 
 To create a production build:
-
-npm run build
-
+    ```sh
+    npm run build
+    ```
 To start the production server locally:
-
-npm start
-
+    ```sh
+    npm start
+    ```
 ### Live Deployment
 
 The application is deployed on Vercel at [https://beavgredients.vercel.app/](https://beavgredients.vercel.app/)
