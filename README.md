@@ -54,12 +54,9 @@ Make sure the following are installed on your machine:
 - npm (comes with Node)
 
 You can verify installation with:
-    ```sh
     node -v
-    ```  
-    ```sh
     npm -v
-    ```
+
 ### Instalation
 
 1. Clone the repository:
