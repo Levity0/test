@@ -19,6 +19,7 @@ app.use(cors({
 // Import the Routes
 const authRoutes = require('./routes/authRoutes');
 const ingredientRoutes = require('./routes/ingredientRoutes');
+const mealRoutes = require('./routes/mealRoutes');
 
 // display meals 
 app.get("/home", async (req, res) => { // used to be /api/home
@@ -91,11 +92,10 @@ app.use('/api/auth', authRoutes);
 // This means ingredient routes will start with http://localhost:5000/api/ingredients
 app.use('/api/ingredients', ingredientRoutes);
 
-module.exports = app;
+app.use('/api/meals', mealRoutes);
 
-if (process.env.NODE_ENV !== 'production'){
-  const PORT = process.env.PORT || 5001;
-  app.listen(PORT, () => {
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-}
+
