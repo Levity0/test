@@ -8,6 +8,9 @@ import { useState } from "react";
 import { initialPantryData } from "../data/pantryData";
 import type { FoodCategory } from "../data/pantryData";
 
+// Temp for beta
+const TEST_USER_ID = "cc83483f-40ee-47f1-87eb-62c962c279bc";
+
 export function PantryPanel({ isOpen }: { isOpen: boolean }) {
   const [categories, setCategories] = useState<FoodCategory[]>(initialPantryData);
 
@@ -16,6 +19,53 @@ export function PantryPanel({ isOpen }: { isOpen: boolean }) {
     newCategories[index].collapsed = !newCategories[index].collapsed;
     setCategories(newCategories);
   };
+
+  // Function to toggle ingredients into user database
+const handleIngredientToggle = async (categoryIndex: number, ingredientIndex: number) => {
+  // 1. Create a deep-ish copy of the categories
+  const newCategories = categories.map((cat, idx) => {
+    if (idx !== categoryIndex) return cat;
+
+    // 2. Only clone the category we are actually changing
+    return {
+      ...cat,
+      ingredients: cat.ingredients.map((ing, iIdx) => {
+        if (iIdx !== ingredientIndex) return ing;
+        
+        // 3. Flip the specific ingredient's selected status
+        return { ...ing, selected: !ing.selected };
+      }),
+    };
+  });
+
+  // 4. Get the new status to send to the backend
+  const updatedIngredient = newCategories[categoryIndex].ingredients[ingredientIndex];
+  const newSelectedStatus = updatedIngredient.selected;
+  console.log("New Status for", updatedIngredient.name, ":", newSelectedStatus)
+
+  // 5. Update the UI state (The color will change NOW)
+  setCategories(newCategories);
+
+  // 6. Sync with backend in the background
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/ingredients/toggle`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        userId: TEST_USER_ID,
+        name: updatedIngredient.name,
+        isSelected: newSelectedStatus
+      }),
+    });
+
+    if (!response.ok) {
+      console.error("Failed to sync with database");
+      // Optional: Revert state if the DB call fails
+    }
+  } catch (error) {
+    console.error("Connection error:", error);
+  }
+};
 
   if (!isOpen) return null;
 
@@ -63,6 +113,7 @@ export function PantryPanel({ isOpen }: { isOpen: boolean }) {
                   {category.ingredients.map((ingredient, ingredientIndex) => (
                     <label
                       key={ingredientIndex}
+                     onMouseDown={() => handleIngredientToggle(categoryIndex, ingredientIndex)}
                       className={`px-3 py-1.5 rounded-full border cursor-pointer transition-colors ${
                         ingredient.selected
                           ? "bg-green-50 border-green-500 text-green-700"

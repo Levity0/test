@@ -7,10 +7,9 @@ import { RecipeCart } from "./components/RecipeCart";
 import { Button } from "./components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-
-async function getRecipes(letter: string = "a"){
-  //const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001'
-  const res = await fetch(`/home?letter=${letter}`, { ///api/home?letter=a
+async function getRecipes(){
+  const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'
+  const res = await fetch(`${apiBase}/api/home?letter=a`, {
     cache: 'no-store', // ensure fresh data every request
   });
   if (!res.ok){
@@ -27,22 +26,20 @@ export default function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getRecipes("a").then(data =>{
+    getRecipes().then(data =>{
       setRecipes(data);
       setLoading(false);
     })
     .catch(err => {
       console.error(err);
-      
       setLoading(false);
     });
   }, []);
 
   if (loading) return <div>Loading...</div>
 
-
   return (
-    <div data-testid="page-root" className="flex h-screen bg-white overflow-hidden min-w-[1200px]">
+     <div data-testid="page-root" className="flex h-screen bg-white overflow-hidden min-w-[1200px]">
       {/* Pantry Toggle */}
       {!isPantryOpen && (
         <div className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10">
