@@ -6,16 +6,24 @@ Alexander Sahlstrom, Levi Cook, Nico Sarmiento, Kenneth Robertson
 
 ## About The Project
 
-## Built With
+Beavsgridients is a 
+
+### Built With
 
 * [![Next][Next.js]][Next-url]
 * [![React][React.js]][React-url]
 * [![Vercel][Vercel]][Vercel-url]
 * [![TheMealDB][TheMealDB]][TheMealDB-url]
 
-* 
 ## Getting Started
 
+### Prerequisites
+
+Open the website at [https://beavgredients.vercel.app/](https://beavgredients.vercel.app/)
+
+## Usage
+
+## Testing
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [Next.js]: https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
