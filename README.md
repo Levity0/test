@@ -3,6 +3,7 @@
 Team:
 Alexander Sahlstrom, Levi Cook, Nico Sarmiento, Kenneth Robertson
 
+<!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
   <ol>
@@ -16,13 +17,14 @@ Alexander Sahlstrom, Levi Cook, Nico Sarmiento, Kenneth Robertson
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-
+        <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-
   </ol>
 </details>
+
+
 
 
 ## About The Project
