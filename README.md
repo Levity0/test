@@ -57,6 +57,7 @@ You can verify installation with:
 ```sh
 node -v
 ```
+
 ```sh
 npm -v
 ```
