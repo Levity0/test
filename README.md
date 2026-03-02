@@ -87,13 +87,13 @@ The application should now be running locally.
 ### Build Production
 
 To create a production build:
-    ```sh
-    npm run build
-    ```
+```sh
+npm run build
+```
 To start the production server locally:
-    ```sh
-    npm start
-    ```
+```sh
+npm start
+```
 ### Live Deployment
 
 The application is deployed on Vercel at [https://beavgredients.vercel.app/](https://beavgredients.vercel.app/)
