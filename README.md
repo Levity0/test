@@ -25,7 +25,7 @@ Congrats you did it.
 
 ## Usage
 
-[![Product Name Screen Shot][example-screenshot-1]](https://beavgredients.vercel.app/)
+[![Example 1 Screen Shot][example-screenshot-1]](https://beavgredients.vercel.app/)
 
 ## Testing
 
