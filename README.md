@@ -2,8 +2,11 @@
 
 ### Team:
 Alexander Sahlstrom
+
 Levi Cook
+
 Nico Sarmiento
+
 Kenneth Robertson
 
 <!-- TABLE OF CONTENTS -->
