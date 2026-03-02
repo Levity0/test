@@ -1,6 +1,6 @@
 ### Beavgredients
 
-Team:
+## Team:
 Alexander Sahlstrom, Levi Cook, Nico Sarmiento, Kenneth Robertson
 
 <!-- TABLE OF CONTENTS -->
@@ -23,7 +23,7 @@ Alexander Sahlstrom, Levi Cook, Nico Sarmiento, Kenneth Robertson
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#">Roadmap</a></li>
+    <li><a href="#testing">Testing</a></li>
   </ol>
 </details>
 
@@ -32,7 +32,10 @@ Alexander Sahlstrom, Levi Cook, Nico Sarmiento, Kenneth Robertson
 
 ## About The Project
 
-Beavsgridients is a web application that helps you
+Beavgridients is a web application that helps with recipe searching while on a budget. 
+
+Beavgridients allows users to input ingridients they have at home into a pantry, then lists recipes you can make with the ingridients they already have on hand. It'll also show recipes that you're only missing 1 ingridient for. Users can then add recipes they're interested into a cart, which they can then email to themselves with a list of ingridients they are missing to shop for.
+
 
 
 Open the website at [https://beavgredients.vercel.app/](https://beavgredients.vercel.app/)
@@ -104,6 +107,12 @@ The application is deployed on Vercel at [https://beavgredients.vercel.app/](htt
 [![Example 1 Screen Shot][example-screenshot-1]](https://beavgredients.vercel.app/)
 
 ## Testing
+
+Still working on it =(
+
+### Use Case 1
+
+Pretend that I put a use case in here
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [Next.js]: https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
