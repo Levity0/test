@@ -1,9 +1,9 @@
-import { createClient } from "@supabase/supabase-js";
+const { createClient } = require('@supabase/supabase-js');
+// require('dotenv').config();
 
-const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL, 
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
 
-if (!url) throw new Error("NEXT_PUBLIC_SUPABASE_URL is missing");
-if (!key) throw new Error("NEXT_PUBLIC_SUPABASE_ANON_KEY is missing");
-
-export const supabase = createClient(url, key);
+module.exports = supabase;

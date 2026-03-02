@@ -22,7 +22,7 @@ const ingredientRoutes = require('./routes/ingredientRoutes');
 const mealRoutes = require('./routes/mealRoutes');
 
 // display meals 
-app.get("/api/home", async (req, res) => { // used to be /api/home
+app.get("/home", async (req, res) => { // used to be /api/home
   try {
     const { letter } = req.query;
     if (!letter){ // if null return error
@@ -35,14 +35,14 @@ app.get("/api/home", async (req, res) => { // used to be /api/home
     //www.themealdb.com/api/json/v1/1/search.php?f=a
     // organize data fetched from TheMealDB
     const rawMealsData = response.data.meals || []; // if meal db returns nothing response is an empty array instead of mapping error
-    const organizedMeals = rawMealsData.map(meal => ({ 
-      ...meal, // This ensures strIngredient1, strIngredient2, etc. are included
+    const organizedMeals = rawMealsData.map (meal =>({ 
       id: meal.idMeal,
       image: meal.strMealThumb,
       name: meal.strMeal,
       category: meal.strCategory,
       area: meal.strArea,
       recipe: meal.strInstructions
+
     }));
     res.json(organizedMeals);
   }catch(error) { // catch errors from meal db
@@ -52,7 +52,7 @@ app.get("/api/home", async (req, res) => { // used to be /api/home
 });
 
 // display meals based on search
-app.get("/api/search", async (req, res) => {
+app.get("/search", async (req, res) => {
   try {
     const { mealName }  = req.query;
     if (!mealName){ // if null return error
@@ -79,6 +79,10 @@ app.get("/api/search", async (req, res) => {
     res.status(500).json({error: "internal server error"});
   }
 });
+
+// Middleware
+// app.use(cors()); 
+
 
 
 // Use the Routes
