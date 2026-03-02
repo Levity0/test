@@ -1,7 +1,10 @@
 # Beavgredients
 
-## Team:
-Alexander Sahlstrom, Levi Cook, Nico Sarmiento, Kenneth Robertson
+### Team:
+Alexander Sahlstrom
+Levi Cook
+Nico Sarmiento
+Kenneth Robertson
 
 <!-- TABLE OF CONTENTS -->
 <details>
