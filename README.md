@@ -6,7 +6,7 @@ Alexander Sahlstrom, Levi Cook, Nico Sarmiento, Kenneth Robertson
 
 ## About The Project
 
-Beavsgridients is a 
+Beavsgridients is a web application that helps you
 
 ### Built With
 
@@ -21,7 +21,11 @@ Beavsgridients is a
 
 Open the website at [https://beavgredients.vercel.app/](https://beavgredients.vercel.app/)
 
+Congrats you did it.
+
 ## Usage
+
+[![Product Name Screen Shot][example-screenshot-1]](https://beavgredients.vercel.app/)
 
 ## Testing
 
@@ -34,3 +38,5 @@ Open the website at [https://beavgredients.vercel.app/](https://beavgredients.ve
 [Vercel-url]: https://vercel.com/
 [TheMealDB]: https://img.shields.io/badge/TheMealDB-FF6F00?style=for-the-badge&logo=api&logoColor=white
 [TheMealDB-url]: https://www.themealdb.com/
+
+[example-screenshot-1]: Web/app/components/ui/example-screenshot-1.png
