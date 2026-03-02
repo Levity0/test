@@ -1,63 +1,61 @@
-import handler from "../api/send-email.js"; // <-- adjust path
+/**
+ * @file __tests__/emailHandler.test.js
+ *
+ * Tests for Web/api/send-email.js (Vercel serverless function style)
+ */
 
-// mock nodemailer
 jest.mock("nodemailer", () => ({
-  createTransport: jest.fn(() => ({
-    sendMail: jest.fn(),
-  })),
+  createTransport: jest.fn(),
 }));
 
-import nodemailer from "nodemailer";
+const nodemailer = require("nodemailer");
+const handler = require("../api/send-email.js");
 
+// simple res mock for express-style handlers (req, res)
 function mockRes() {
   const res = {};
-  res.status = jest.fn(() => res);
-  res.json = jest.fn(() => res);
+  res.status = jest.fn().mockReturnValue(res);
+  res.json = jest.fn().mockReturnValue(res);
+  res.end = jest.fn().mockReturnValue(res);
   return res;
 }
 
-describe("Email handler", () => {
+describe("api/send-email.js", () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+    process.env.SMTP_USER = "smtp_user";
+    process.env.SMTP_PASS = "smtp_pass";
+    process.env.EMAIL_FROM = "from@example.com";
+  });
 
-  test("rejects non-POST requests", async () => {
-    const req = { method: "GET" };
+  test("returns 405 for non-POST", async () => {
+    const req = { method: "GET", body: {} };
     const res = mockRes();
 
     await handler(req, res);
 
     expect(res.status).toHaveBeenCalledWith(405);
-    expect(res.json).toHaveBeenCalledWith({
-      ok: false,
-      error: "Use POST",
-    });
+    expect(res.json).toHaveBeenCalledWith({ ok: false, error: "Use POST" });
   });
 
   test("returns 400 if missing fields", async () => {
-    const req = {
-      method: "POST",
-      body: { to: "", subject: "", message: "" },
-    };
+    const req = { method: "POST", body: { to: "", subject: "", message: "" } };
     const res = mockRes();
 
     await handler(req, res);
 
     expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.json).toHaveBeenCalledWith({
-      ok: false,
-      error: "Missing fields",
-    });
+    expect(res.json).toHaveBeenCalledWith({ ok: false, error: "Missing fields" });
   });
 
-  test("sends email successfully", async () => {
-    const sendMailMock = jest.fn().mockResolvedValue({ messageId: "123" });
-
-    nodemailer.createTransport.mockReturnValue({
-      sendMail: sendMailMock,
-    });
+  test("returns 200 when email sends", async () => {
+    const sendMail = jest.fn().mockResolvedValue({ messageId: "abc123" });
+    nodemailer.createTransport.mockReturnValue({ sendMail });
 
     const req = {
       method: "POST",
       body: {
-        to: "test@example.com",
+        to: "to@example.com",
         subject: "Hello",
         message: "Test message",
       },
@@ -66,23 +64,36 @@ describe("Email handler", () => {
 
     await handler(req, res);
 
-    expect(sendMailMock).toHaveBeenCalled();
-    expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith({
-      ok: true,
-      messageId: "123",
+    expect(nodemailer.createTransport).toHaveBeenCalledWith({
+      service: "gmail",
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
     });
+
+    expect(sendMail).toHaveBeenCalledWith({
+      from: process.env.EMAIL_FROM,
+      to: "to@example.com",
+      subject: "Hello",
+      text: "Test message",
+    });
+
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith({ ok: true, messageId: "abc123" });
   });
 
-  test("returns 500 if nodemailer throws", async () => {
-    nodemailer.createTransport.mockReturnValue({
-      sendMail: jest.fn().mockRejectedValue(new Error("fail")),
-    });
+  test("returns 500 when nodemailer throws (no noisy console)", async () => {
+    // ✅ Silence console.error for THIS test only
+    const consoleSpy = jest.spyOn(console, "error").mockImplementation(() => {});
+
+    const sendMail = jest.fn().mockRejectedValue(new Error("fail"));
+    nodemailer.createTransport.mockReturnValue({ sendMail });
 
     const req = {
       method: "POST",
       body: {
-        to: "test@example.com",
+        to: "to@example.com",
         subject: "Hello",
         message: "Test message",
       },
@@ -92,10 +103,8 @@ describe("Email handler", () => {
     await handler(req, res);
 
     expect(res.status).toHaveBeenCalledWith(500);
-    expect(res.json).toHaveBeenCalledWith({
-      ok: false,
-      error: "fail",
-    });
-  });
+    expect(res.json).toHaveBeenCalledWith({ ok: false, error: "fail" });
 
+    consoleSpy.mockRestore();
+  });
 });
