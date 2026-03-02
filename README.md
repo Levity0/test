@@ -18,6 +18,8 @@ Alexander Sahlstrom, Levi Cook, Nico Sarmiento, Kenneth Robertson
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
+        <li><a href="#build-production">Build Production</a></li>
+        <li><a href="#live-deployment">Live Deployment</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -32,6 +34,9 @@ Alexander Sahlstrom, Levi Cook, Nico Sarmiento, Kenneth Robertson
 
 Beavsgridients is a web application that helps you
 
+
+Open the website at [https://beavgredients.vercel.app/](https://beavgredients.vercel.app/)
+
 ### Built With
 
 * [![Next][Next.js]][Next-url]
@@ -43,9 +48,53 @@ Beavsgridients is a web application that helps you
 
 ### Prerequisites
 
-Open the website at [https://beavgredients.vercel.app/](https://beavgredients.vercel.app/)
+Make sure the following are installed on your machine:
 
-Congrats you did it.
+- Node.js (v18 or later recommended)
+- npm (comes with Node)
+
+You can verify installation with:
+
+node -v  
+npm -v
+
+### Instalation
+
+1. Clone the repository:
+
+   git clone https://github.com/YOUR-ORG/YOUR-REPO.git
+
+2. Navigate into the project directory:
+
+   cd beavgredients
+
+3. Install dependencies:
+
+   npm install
+
+4. Start the development server:
+
+   npm run dev
+
+5. Open your browser and go to:
+
+   http://localhost:3000
+
+The application should now be running locally.
+
+### Build Production
+
+To create a production build:
+
+npm run build
+
+To start the production server locally:
+
+npm start
+
+### Live Deployment
+
+The application is deployed on Vercel at [https://beavgredients.vercel.app/](https://beavgredients.vercel.app/)
 
 ## Usage
 
