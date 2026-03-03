@@ -145,9 +145,11 @@ The application is deployed on Vercel at [https://beavgredients.vercel.app/](htt
 
 GitHub Actions is configured to automatically run the test workflow on a push to main
 
-- To run tests locally:  
+- To run tests locally:
   ```bash
   npm test
+  ```
+
 
 ## Documentation
 
