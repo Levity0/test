@@ -8,7 +8,7 @@ app.use(express.json());
 
 //On deployment replace * with vercel url * means allow everything which is fine for now
 app.use(cors({
-  origin: '*', //https://beavgredients.vercel.app
+  origin: true, 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
