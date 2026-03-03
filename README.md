@@ -54,9 +54,9 @@ Kenneth Robertson
 
 ## About The Project
 
-Beavgridients is a web application that helps with recipe searching while on a budget. 
+Beavgredients is a web application that helps with recipe searching while on a budget. 
 
-Beavgridients allows users to input ingridients they have at home into a pantry, then lists recipes you can make with the ingridients they already have on hand. It'll also show recipes that you're only missing 1 ingridient for. Users can then add recipes they're interested into a cart, which they can then email to themselves with a list of ingridients they are missing to shop for.
+Beavgredients allows users to input ingredients they have at home into a pantry, then lists recipes you can make with the ingredients they already have on hand. It'll also show recipes that you're only missing 1 ingridient for. Users can then add recipes they're interested into a cart, which they can then email to themselves with a list of ingredients they are missing to shop for.
 
 
 
@@ -86,7 +86,7 @@ node -v
 ```sh
 npm -v
 ```
-### Instalation
+### Installation
 
 1. Clone the repository:
    ```sh
@@ -130,11 +130,11 @@ The application is deployed on Vercel at [https://beavgredients.vercel.app/](htt
 
 1. Open the application (locally or via the live deployment).
 
-2. In the pantry section on the left side of the screen, add the following ingridients:
+2. In the pantry section on the left side of the screen, add the following ingredients:
   - egg
   - peanut_butter
 
-3. After adding the ingridients, select "Filter" and select "Missing 1 Ingridient"
+3. After adding the ingredients, select "Filter" and select "Missing 1 Ingridient"
 
 4. After filtering, select the first recipe shown:
    - Should be "Peanut Butter Cookies"
@@ -147,7 +147,7 @@ The application is deployed on Vercel at [https://beavgredients.vercel.app/](htt
    
 7. Fill the form with your email
    
-8. A list with the recipes you selected and the ingridients you are missing and need to buy will be sent to the provided email
+8. A list with the recipes you selected and the ingredients you are missing and need to buy will be sent to the provided email
 
 
 ## Testing
@@ -174,7 +174,7 @@ Technical architecture, development workflow, and internal design details: [Deve
 - Using GitHub repository for feature branches and pull requests
 
 ### Issue Tracking
-- Trello board to track bugs, featuures and project tasks
+- Trello board to track bugs, features and project tasks
 
 ### Continuous Integration
 - GitHub Actions workflow (.github/workflows/ci.yml) automatically builds the project on push
