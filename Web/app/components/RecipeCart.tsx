@@ -272,7 +272,7 @@ export function RecipeCart({
                     key={getRecipeId(recipe)}
                     className="flex items-center justify-between p-3 bg-gray-50 rounded-lg group"
                   >
-                    <span className="text-sm font-medium truncate pr-2 inline-block max-w-full">
+                    <span className="text-sm font-medium truncate pr-2 inline-block min-w-0 flex-1">
                       {getRecipeName(recipe)}
                     </span>
                     <Button
