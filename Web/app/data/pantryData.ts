@@ -14,13 +14,13 @@ export const initialPantryData: FoodCategory[] = [
     type: "Essentials",
     collapsed: false,
     ingredients: [
-      { name: "egg", selected: false },
+      { name: "Egg", selected: false },
       { name: "Salt", selected: false },
       { name: "Black Pepper", selected: false },
       { name: "Milk", selected: false },
       { name: "White Rice", selected: false },
-      { name: "sugar", selected: false },
-      {name: "peanut_butter", selected: false},
+      { name: "Sugar", selected: false },
+      {name: "Peanut Butter", selected: false},
     ],
   },
   {

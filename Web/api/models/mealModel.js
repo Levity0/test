@@ -2,22 +2,29 @@ const axios = require('axios');
 const supabase = require('../supabase');
 
 class MealModel {
-  static async filterByPantry(userId, filterType) {
+static async filterByPantry(userId, filterType) {
     const categories = ['Vegetarian', 'Vegan', 'Breakfast', 'Dessert'];
     
-    // --- 1. CATEGORY LOGIC ---
     if (categories.includes(filterType)) {
       try {
         const res = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${filterType}`);
         const meals = res.data.meals || [];
-        return meals.map(m => ({
-          id: m.idMeal,
-          name: m.strMeal,
-          image: m.strMealThumb,
-          totalIngredients: 0,
-          displayedIngredients: [],
-          hiddenCount: 0
-        }));
+        
+        // --- FIX: Categories need full details for ingredients ---
+        const detailedMeals = [];
+        for (const m of meals.slice(0, 15)) { // Limit to 15 for speed
+          const detailRes = await axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${m.idMeal}`);
+          const fullMeal = detailRes.data.meals[0];
+          if (fullMeal) {
+            detailedMeals.push({
+              ...fullMeal, // <--- SPREAD FULL DATA (CRITICAL)
+              id: fullMeal.idMeal,
+              name: fullMeal.strMeal,
+              image: fullMeal.strMealThumb,
+            });
+          }
+        }
+        return detailedMeals;
       } catch (err) {
         console.error("MealDB Category Error:", err);
         return [];
@@ -52,11 +59,19 @@ class MealModel {
         if (!fullMeal) continue;
 
         const recipeIngredients = this.extractIngredients(fullMeal);
-        const missing = recipeIngredients.filter(rIng => 
-          !pantryNames.some(pName => rIng.includes(pName) || pName.includes(rIng))
-        );
+
+        const missing = recipeIngredients.filter(rIng => {
+          const cleanRIng = rIng.toLowerCase().trim();
+          return !pantryNames.some(pName => 
+            // This is the "Smart Match" logic
+            cleanRIng === pName || 
+            cleanRIng.includes(pName) || 
+            pName.includes(cleanRIng)
+          );
+        });
 
         const formatted = {
+          ...fullMeal,
           id: fullMeal.idMeal,
           name: fullMeal.strMeal,
           image: fullMeal.strMealThumb,
