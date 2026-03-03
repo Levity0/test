@@ -143,21 +143,19 @@ The application is deployed on Vercel at [https://beavgredients.vercel.app/](htt
 
 ## Testing
 
-GitHub Actions is configured to automatically build the project on every push and pull request to the main branch.
+GitHub Actions is configured to automatically run the test workflow on a push to main
 
-The workflow:
- - Installs dependancies
- - Builds the project
+- To run tests locally:  
+  ```bash
+  npm test
 
 ## Documentation
 
 ### User Documentation
-Detailed instructions for end users can be found here:
-[User Documentation](/User_Documentation.md)
+Instructions for end users can be found here: [User Documentation](/User_Documentation.md)
 
 ### Developer Documentation
-Technical architecture, development workflow, and internal design details:
-[Developer Documentation](Developer_Documentation.md)
+Technical architecture, development workflow, and internal design details: [Developer Documentation](Developer_Documentation.md)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
