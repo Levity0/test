@@ -30,6 +30,13 @@ Kenneth Robertson
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#testing">Testing</a></li>
+    <li>
+      <a href="#documentation">Documentation</a>
+      <ul>
+        <li><a href="#user-documentation">User Documentation</a></li>
+        <li><a href="#developer-documentation">Developer Documentation</a></li>
+      </ul>
+    </li>
   </ol>
 </details>
 
@@ -110,15 +117,48 @@ The application is deployed on Vercel at [https://beavgredients.vercel.app/](htt
 
 ## Usage
 
+### Operational Use Case: Load a recipe missing 1 ingridient & email ingridient list
+
+1. Open the application (locally or via the live deployment).
+
+2. In the pantry section on the left side of the screen, add the following ingridients:
+  - egg
+  - peanut_butter
+
+3. After adding the ingridients, select "Filter" and select "Missing 1 Ingridient"
+
+4. After filtering, select the first recipe shown:
+   - Should be "Peanut Butter Cookies"
+  
 [![Example 1 Screen Shot][example-screenshot-1]](https://beavgredients.vercel.app/)
+
+5. Click the green "+" button to add the recipe to your cart
+   
+6. Click "Start Cooking" on the bottom right of the screen
+   
+7. Fill the form with your email
+   
+8. A list with the recipes you selected and the ingridients you are missing and need to buy will be sent to the provided email
+
 
 ## Testing
 
-Still working on it =(
+GitHub Actions is configured to automatically build the project on every push and pull request to the main branch.
 
-### Use Case 1
+The workflow:
+ - Installs dependancies
+ - Builds the project
 
-Pretend that I put a use case in here
+## Documentation
+
+### User Documentation
+Detailed instructions for end users can be found here:
+[User Documentation](/User_Documentation.md)
+
+### Developer Documentation
+Technical architecture, development workflow, and internal design details:
+[Developer Documentation](Developer_Documentation.md)
+
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [Next.js]: https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
