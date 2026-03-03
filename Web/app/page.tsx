@@ -77,16 +77,21 @@ export default function App() {
 
   return (
     <div className="flex h-screen bg-white overflow-hidden min-w-[1200px]">
-      <div className="relative">
-        <PantryPanel isOpen={isPantryOpen} />
-        <Button
-          variant="outline" size="icon"
-          className={`absolute top-1/2 z-20 transform -translate-y-1/2 transition-all rounded-full bg-white shadow-md ${isPantryOpen ? 'right-0 translate-x-1/2' : 'left-0'}`}
-          onClick={() => setIsPantryOpen(!isPantryOpen)}
-        >
-          {isPantryOpen ? <ChevronLeft /> : <ChevronRight />}
-        </Button>
-      </div>
+    <div className="relative">
+      {/* Add pantryItems and setPantryItems here */}
+      <PantryPanel 
+        isOpen={isPantryOpen} 
+        pantryItems={pantryItems} 
+        setPantryItems={setPantryItems} 
+      />
+      <Button
+        variant="outline" size="icon"
+        className={`absolute top-1/2 z-20 transform -translate-y-1/2 transition-all rounded-full bg-white shadow-md ${isPantryOpen ? 'right-0 translate-x-1/2' : 'left-0'}`}
+        onClick={() => setIsPantryOpen(!isPantryOpen)}
+      >
+        {isPantryOpen ? <ChevronLeft /> : <ChevronRight />}
+      </Button>
+    </div>
 
       {/* Middle Panel - Passing addToKart */}
       <RecipeBrowser initialData={recipes} onAddToKart={addToKart} />

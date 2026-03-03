@@ -17,24 +17,37 @@ export function RecipeCart({ isOpen, selectedRecipes, pantryItems, onRemove }: R
   const [status, setStatus] = useState<string | null>(null);
 
   // --- LOGIC: CALCULATE MISSING ITEMS ---
-  const missingIngredients = useMemo(() => {
-    const allRequired: string[] = [];
+console.log("Current Pantry:", pantryItems);
+console.log("First Selected Recipe:", selectedRecipes[0]);
+const missingIngredients = useMemo(() => {
+  // Use the strings directly from your console log: ["peanut butter", "sugar", "egg"]
+  const selectedPantryNames = pantryItems; 
 
-    selectedRecipes.forEach((recipe) => {
-      for (let i = 1; i <= 20; i++) {
-        const ing = recipe[`strIngredient${i}`] || recipe.ingredients?.[i];
-        if (ing && typeof ing === 'string' && ing.trim() !== "") {
-          allRequired.push(ing.toLowerCase().trim());
+  const missing: string[] = [];
+
+  selectedRecipes.forEach((recipe: any) => {
+    for (let i = 1; i <= 20; i++) {
+      const ing = recipe[`strIngredient${i}`];
+      
+      if (ing && typeof ing === 'string' && ing.trim() !== "") {
+        const cleanRecipeIng = ing.toLowerCase().trim();
+        
+        // Match against the strings in your console log
+        const isFoundInPantry = selectedPantryNames.some(pantryName => 
+          cleanRecipeIng === pantryName || 
+          cleanRecipeIng.includes(pantryName) || 
+          pantryName.includes(cleanRecipeIng)
+        );
+
+        if (!isFoundInPantry) {
+          missing.push(ing); 
         }
       }
-    });
+    }
+  });
 
-    const uniqueRequired = Array.from(new Set(allRequired));
-
-    return uniqueRequired.filter(item =>
-      !pantryItems.some(p => p.toLowerCase() === item)
-    );
-  }, [selectedRecipes, pantryItems]);
+  return Array.from(new Set(missing));
+}, [selectedRecipes, pantryItems]);
 
   // --- LOGIC: GENERATE EMAIL TEXT ---
   const emailBody = useMemo(() => {
