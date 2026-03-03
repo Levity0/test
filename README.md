@@ -37,6 +37,15 @@ Kenneth Robertson
         <li><a href="#developer-documentation">Developer Documentation</a></li>
       </ul>
     </li>
+    <li>
+      <a href="#development-process">Development Process</a>
+      <ul>
+        <li><a href="#version-control">Version Control</a></li>
+        <li><a href="#issue-tracking">Issue Tracking</a></li>
+        <li><a href="#continuous-integration">Continuous Integration</a></li>
+        <li><a href="#build-system">Build System</a></li>
+      </ul>
+    </li>
   </ol>
 </details>
 
@@ -159,6 +168,19 @@ Instructions for end users can be found here: [User Documentation](/User_Documen
 ### Developer Documentation
 Technical architecture, development workflow, and internal design details: [Developer Documentation](Developer_Documentation.md)
 
+## Development Process
+
+### Version Control
+- Using GitHub repository for feature branches and pull requests
+
+### Issue Tracking
+- Trello board to track bugs, featuures and project tasks
+
+### Continuous Integration
+- GitHub Actions workflow (.github/workflows/ci.yml) automatically builds the project on push
+
+### Build System
+- Next.js build via npm scripts (`npm run dev`, `npm run build`)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [Next.js]: https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
