@@ -4,14 +4,12 @@ import { Search, ChevronRight, ChevronDown } from "lucide-react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Checkbox } from "./ui/checkbox";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { initialPantryData } from "../data/pantryData";
 import type { FoodCategory } from "../data/pantryData";
 
-// Temp for beta
 const TEST_USER_ID = "cc83483f-40ee-47f1-87eb-62c962c279bc";
 
-// Added pantryItems and setPantryItems to the props interface
 interface PantryPanelProps {
   isOpen: boolean;
   pantryItems: string[];
@@ -21,6 +19,17 @@ interface PantryPanelProps {
 export function PantryPanel({ isOpen, pantryItems, setPantryItems }: PantryPanelProps) {
   const [categories, setCategories] = useState<FoodCategory[]>(initialPantryData);
 
+  // Sync internal UI (bubbles) with the global pantry state
+  useEffect(() => {
+    setCategories(prev => prev.map(category => ({
+      ...category,
+      ingredients: category.ingredients.map(ing => ({
+        ...ing,
+        selected: pantryItems.includes(ing.name.toLowerCase().trim())
+      }))
+    })));
+  }, [pantryItems]);
+
   const toggleCategory = (index: number) => {
     const newCategories = [...categories];
     newCategories[index].collapsed = !newCategories[index].collapsed;
@@ -28,42 +37,25 @@ export function PantryPanel({ isOpen, pantryItems, setPantryItems }: PantryPanel
   };
 
   const handleIngredientToggle = async (categoryIndex: number, ingredientIndex: number) => {
-    // 1. Create a deep copy of the categories
-    const newCategories = categories.map((cat, idx) => {
-      if (idx !== categoryIndex) return cat;
-      return {
-        ...cat,
-        ingredients: cat.ingredients.map((ing, iIdx) => {
-          if (iIdx !== ingredientIndex) return ing;
-          return { ...ing, selected: !ing.selected };
-        }),
-      };
-    });
+    const targetIng = categories[categoryIndex].ingredients[ingredientIndex];
+    const ingredientName = targetIng.name.toLowerCase().trim();
+    const newSelectedStatus = !targetIng.selected;
 
-    const updatedIngredient = newCategories[categoryIndex].ingredients[ingredientIndex];
-    const newSelectedStatus = updatedIngredient.selected;
-    const ingredientName = updatedIngredient.name.toLowerCase().trim();
-
-    // 2. Update Local UI State (Green Bubbles)
-    setCategories(newCategories);
-
-    // 3. Update Shared Global State (Shopping List Logic)
+    // 1. Update Global State Immediately (This makes the shopping list dynamic)
     if (newSelectedStatus) {
-      // Add to pantry if not already there
       setPantryItems(prev => prev.includes(ingredientName) ? prev : [...prev, ingredientName]);
     } else {
-      // Remove from pantry
       setPantryItems(prev => prev.filter(item => item !== ingredientName));
     }
 
-    // 4. Sync with backend
+    // 2. Sync with backend
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/ingredients/toggle`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           userId: TEST_USER_ID,
-          name: updatedIngredient.name,
+          name: targetIng.name,
           isSelected: newSelectedStatus
         }),
       });
@@ -95,12 +87,7 @@ export function PantryPanel({ isOpen, pantryItems, setPantryItems }: PantryPanel
             <div className="p-4">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="font-medium">{category.type}</h3>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-6 w-6"
-                  onClick={() => toggleCategory(categoryIndex)}
-                >
+                <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => toggleCategory(categoryIndex)}>
                   {category.collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
                 </Button>
               </div>
@@ -110,7 +97,11 @@ export function PantryPanel({ isOpen, pantryItems, setPantryItems }: PantryPanel
                   {category.ingredients.map((ingredient, ingredientIndex) => (
                     <label
                       key={ingredientIndex}
-                      onMouseDown={() => handleIngredientToggle(categoryIndex, ingredientIndex)}
+                      // Changed to onClick for better React event consistency
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleIngredientToggle(categoryIndex, ingredientIndex);
+                      }}
                       className={`px-3 py-1.5 rounded-full border cursor-pointer transition-colors ${
                         ingredient.selected
                           ? "bg-green-50 border-green-500 text-green-700"
