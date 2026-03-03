@@ -44,4 +44,14 @@ export const initialPantryData: FoodCategory[] = [
       { name: "Broccoli", selected: false },
     ],
   },
+  {
+    type: "Meats",
+    collapsed: false,
+    ingredients: [
+      { name: "Chicken", selected: false },
+      { name: "Beef", selected: false },
+      { name: "Pork", selected: false },
+      { name: "Salmon", selected: false },
+    ],
+  }
 ];

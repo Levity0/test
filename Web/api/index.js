@@ -114,6 +114,17 @@ app.use('/api/ingredients', ingredientRoutes);
 
 app.use('/api/meals', mealRoutes);
 
+const sendEmailHandler = require('./send-email');
+
+app.post('/api/send-email', async (req, res) => {
+  try {
+    // This executes the logic inside your send-email.js file
+    await sendEmailHandler(req, res);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
